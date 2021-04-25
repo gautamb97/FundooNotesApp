@@ -1,0 +1,63 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "FundooNoteApp",
+        "description": "This app is build for storing notes"
+    },
+    "host": "localhost:3000",
+    "tags": [
+        {
+            "name": "FundooNotes",
+            "description": "API for notes in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/fundooNotes": {
+            "get": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Get all notes from FundooNotesApp",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Create a new note in the FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Note that we want to create"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Failed to create an new note"
+                    }
+                }
+            }
+        }
+    }
+}
