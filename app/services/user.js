@@ -11,6 +11,16 @@ class Service {
       }
     });
   }
+
+  findAll = (callback) => {
+    fundooNotes.findAll((err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, result);
+      }
+    });
+  }
 }
 
 module.exports = new Service();

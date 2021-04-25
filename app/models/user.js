@@ -27,5 +27,15 @@ class Model {
         callback(err);
       });
   }
+
+  findAll = (callback) => {
+    FundooNote.find()
+      .select('firstName lastName email password _id')
+      .then((dataOne) => {
+        callback(null, dataOne);
+      }).catch((err) => {
+        callback(err);
+      });
+  }
 }
 module.exports = new Model();

@@ -4,4 +4,6 @@ module.exports = (app) => {
   const fundooNotes = require('../controllers/user');
 
   app.post('/fundooNotes', fundooNotes.create);
+
+  app.get('/fundooNotes', fundooNotes.findAll);
 };

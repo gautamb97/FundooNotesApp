@@ -23,12 +23,29 @@ class Controller {
       if (error) {
         res.status(400).send({
           success: false,
-          message: "Some error occured",
+          message: 'Some error occured',
         });
       } else {
         res.status(200).send({
           success: true,
-          message: "created successfully",
+          message: 'created successfully',
+          result: data,
+        });
+      }
+    });
+  }
+
+  findAll = (req, res) => {
+    fundooNotes.findAll((error, data) => {
+      if (error) {
+        res.status(400).send({
+          success: false,
+          message: 'Some error occured',
+        });
+      } else {
+        res.status(200).send({
+          success: true,
+          message: 'data found successfully',
           result: data,
         });
       }
