@@ -15,6 +15,8 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the FundooNotesApp.' });
 });
 
+require('./app/routes/user')(app);
+
 app.listen(process.env.PORT, () => {
   logger.log('info', 'Server is listening on port 3000');
 });
