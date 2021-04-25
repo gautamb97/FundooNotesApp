@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const fundooNoteSchema = mongoose.Schema({
   firstName: { type: String, required: true },
@@ -8,6 +9,17 @@ const fundooNoteSchema = mongoose.Schema({
   password: { type: String, required: true },
 }, {
   timestamps: true,
+});
+
+fundooNoteSchema.pre('save', async function (next) {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hassedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hassedPassword;
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 const FundooNote = mongoose.model('FundooNote', fundooNoteSchema);
