@@ -1,4 +1,10 @@
 /* eslint-disable linebreak-style */
+/**
+ * @description   : It is use to taking the request from the client and gives the response and
+ *                  validating whether the input is correct or not.
+ * @file          : user.js
+ * @author        : Gautam Biswal <gautam971997@gmail.com>
+*/
 const fundooNotes = require('../services/user');
 const { authSchema } = require('../utility/helper');
 

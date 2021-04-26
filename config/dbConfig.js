@@ -1,3 +1,11 @@
+/**
+ * @description   : It is use to establish the connection with database using mongoose ODM 
+ *                  to MongoDB
+ * @package       : mongoose, dotenv
+ * @file          : dbConfig.js
+ * @author        : Gautam Biswal <gautam971997@gmail.com>
+*/
+
 require('dotenv').config();
 
 const mongoose = require('mongoose');

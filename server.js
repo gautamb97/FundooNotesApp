@@ -1,5 +1,14 @@
 /* eslint-disable linebreak-style */
+
+/**
+ * @description   : It is use to establish the connection between the database and server
+ * @package       : express, swagger-ui-express, dotenv
+ * @file          : server.js
+ * @author        : Gautam Biswal <gautam971997@gmail.com>
+*/
 const express = require('express');
+const swaggerUI = require('swagger-ui-express');
+const swaggerDoc = require('./app/swagger.json');
 const logger = require('./app/logger/user');
 require('dotenv').config();
 
@@ -16,6 +25,8 @@ app.get('/', (req, res) => {
 });
 
 require('./app/routes/user')(app);
+
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 app.listen(process.env.PORT, () => {
   logger.log('info', 'Server is listening on port 3000');

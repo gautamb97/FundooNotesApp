@@ -1,4 +1,9 @@
 /* eslint-disable linebreak-style */
+/**
+ * @description   : It is work as a middleware between models and controller
+ * @file          : user.js
+ * @author        : Gautam Biswal <gautam971997@gmail.com>
+*/
 const fundooNotes = require('../models/user');
 
 class Service {

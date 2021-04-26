@@ -1,4 +1,11 @@
 /* eslint-disable linebreak-style */
+/**
+ * @description   : It is use create log files for successfull operation as well as for
+ *                  failed operation.
+ * @package       : winston
+ * @file          : user.js
+ * @author        : Gautam Biswal <gautam971997@gmail.com>
+*/
 const {
   createLogger,
   transports,

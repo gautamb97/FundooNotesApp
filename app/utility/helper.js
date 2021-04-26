@@ -1,5 +1,11 @@
 /* eslint-disable linebreak-style */
-
+/**
+ * @description   : It is use to validate the inputs we are getting from client side using joi and
+ *                  also using Regular expression to follow the pattern properly.
+ * @package       : joi
+ * @file          : helper.js
+ * @author        : Gautam Biswal <gautam971997@gmail.com>
+*/
 const Joi = require('joi');
 
 const authSchema = Joi.object({
