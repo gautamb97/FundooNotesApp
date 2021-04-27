@@ -3,7 +3,7 @@
 ## Author : Gautam Biswal
 
 ## Descrption
-    FundooNote Application it is API based application which are using express framework, nodeJS engine, by this application we can save on note<br> in the app and when we want we fetch all the notes which are existing.<br> If anyone want to use this project in their system so follow the given mentioned steps:
+    FundooNote Application it is API based application which are using express framework, nodeJS engine, by this application we can save on note<br/> in the app and when we want we fetch all the notes which are existing.<br/> If anyone want to use this project in their system so follow the given mentioned steps:
 
 ### Step1:
     Clone the repository in your system.
