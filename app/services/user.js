@@ -9,23 +9,21 @@ const fundooNotes = require('../models/user');
 class Service {
   create = (data, callback) => {
     fundooNotes.create(data, (err, result) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, result);
-      }
+      const service = err ? callback(err) : callback(null, result);
+      return service;
     });
   }
 
-  findAll = (callback) => {
-    fundooNotes.findAll((err, result) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, result);
-      }
+  login = (data, callback) => {
+    fundooNotes.login(data, (err, result) => {
+      const service = err ? callback(err) : callback(null, result);
+      return service;
     });
   }
+
+  // login = (req, res) => {
+  //   fundooNotes.login(req, res);
+  // }
 }
 
 module.exports = new Service();
