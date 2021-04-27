@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 const fundooNoteSchema = mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  email: { type: String, requires: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 }, {
   timestamps: true,
@@ -53,17 +53,31 @@ class Model {
       });
   }
 
-  /**
-   * @description     : It is use to find all the notes which are present in our database
-  */
-  findAll = (callback) => {
-    FundooNote.find()
-      .select('firstName lastName email password _id')
-      .then((dataOne) => {
-        callback(null, dataOne);
-      }).catch((err) => {
-        callback(err);
+  login = (data, callback) => {
+    let username = data.email;
+    let password = data.password;
+
+    FundooNote.findOne({ email: username })
+      .then((user) => {
+        if (user) {
+          bcrypt.compare(password, user.password, (err, result) => {
+            if (err) {
+              callback(err, null);
+            }
+            if (result) {
+              let resultOne = {
+                message: 'success',
+              };
+              callback(null, resultOne);
+            } else {
+              callback('Password does not match');
+            }
+          });
+        } else {
+          callback('user not found');
+        }
       });
   }
 }
+
 module.exports = new Model();

@@ -4,21 +4,15 @@
  * @file          : user.js
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
-const fundooNotes = require('../models/user');
+const models = require('../models/user');
 
 class Service {
   create = (data, callback) => {
-    fundooNotes.create(data, (err, result) => {
-      const service = err ? callback(err) : callback(null, result);
-      return service;
-    });
+    models.create(data, callback);
   }
 
   login = (data, callback) => {
-    fundooNotes.login(data, (err, result) => {
-      const service = err ? callback(err) : callback(null, result);
-      return service;
-    });
+    models.login(data, callback);
   }
 
   // login = (req, res) => {

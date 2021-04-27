@@ -5,8 +5,10 @@
  * @file          : user.js
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
-const fundooNotes = require('../services/user');
+const services = require('../services/user');
 const { authSchema } = require('../utility/helper');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 class Controller {
   create = (req, res) => {
@@ -25,7 +27,7 @@ class Controller {
       });
       return;
     }
-    fundooNotes.create(fundooNote, (error, data) => {
+    services.create(fundooNote, (error, data) => {
       if (error) {
         res.status(400).send({
           success: false,
@@ -41,22 +43,70 @@ class Controller {
     });
   }
 
-  findAll = (req, res) => {
-    fundooNotes.findAll((error, data) => {
+  login = (req, res) => {
+    const fundooNote = {
+      email: req.body.username,
+      password: req.body.password,
+    };
+    services.login(fundooNote, (error, data) => {
       if (error) {
         res.status(400).send({
           success: false,
-          message: 'Some error occured',
+          message: 'login failed',
+          error,
         });
       } else {
         res.status(200).send({
           success: true,
-          message: 'data found successfully',
-          result: data,
+          message: 'logged in successfully',
+          result: jwt.sign({ name: data.name }, 'verySecretValue', { expiresIn: '1h' }),
         });
       }
     });
   }
+
+  // login = (req, res) => {
+  //   const fundooNote = {
+  //     email: req.body.email,
+  //     password: req.body.password,
+  //   };
+  //   fundooNotes.login(fundooNote, (error, data) => {
+  //     if (data) {
+  //         bcrypt.compare(fundooNotes.password, data.password, function(err, result){
+  //           if(err) {
+  //             res.json({
+  //               error: err
+  //             })
+  //           }
+  //           if (result){
+  //             let token = jwt.sign({name: data.name}, 'verySecretValue', {expiresIn : '1h'})
+  //             res.json({
+  //               message: 'login successful',
+  //               token
+  //             })
+  //           }else{
+  //             res.json({
+  //               message: 'password does not match'
+  //             })
+  //           }
+  //         })
+  //     } else {
+  //       res.json({
+  //         message: 'No user found'
+  //       })
+  //     }
+      // else {
+      //   res.status(200).send({
+      //     success: true,
+      //     message: 'login successfull!!!',
+      //     result: data,
+      //   });
+      // }
+  //   });
+  // }
+    // login = (req, res) => {
+    //   fundooNotes.login(req, res);
+    // }
 }
 
 module.exports = new Controller();

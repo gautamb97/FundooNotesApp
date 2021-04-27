@@ -22,7 +22,7 @@
         "application/json"
     ],
     "paths": {
-        "/fundooNotes": {
+        "/registration": {
             "get": {
                 "tags": [
                     "FundooNotes"
