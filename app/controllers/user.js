@@ -5,20 +5,30 @@
  * @file          : user.js
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
+const jwt = require('jsonwebtoken');
 const services = require('../services/user');
 const { authSchema } = require('../utility/helper');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+
+/**
+ * @description    : This class has two methods to create and login of user
+ * @methods        : create and login
+*/
 
 class Controller {
+  /**
+   * @description   : creates an note in fundooNote
+   * @param         : httpRequest and httpResponse
+   * @method        : validate it compares the authSchema properties and the data coming
+   *                  from the object and using services file method
+  */
   create = (req, res) => {
-    const fundooNote = {
+    const userDetails = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
     };
-    const validationResult = authSchema.validate(fundooNote);
+    const validationResult = authSchema.validate(userDetails);
     if (validationResult.error) {
       res.status(400).send({
         success: false,
@@ -27,7 +37,7 @@ class Controller {
       });
       return;
     }
-    services.create(fundooNote, (error, data) => {
+    services.create(userDetails, (error, data) => {
       if (error) {
         res.status(400).send({
           success: false,
@@ -43,12 +53,17 @@ class Controller {
     });
   }
 
+  /**
+   * @description   : login an user in fundooNote
+   * @param         : httpRequest and httpResponse
+   * @method        : services file method for login having an object and callback
+  */
   login = (req, res) => {
-    const fundooNote = {
+    const loginCredentials = {
       email: req.body.username,
       password: req.body.password,
     };
-    services.login(fundooNote, (error, data) => {
+    services.login(loginCredentials, (error, data) => {
       if (error) {
         res.status(400).send({
           success: false,
@@ -64,49 +79,6 @@ class Controller {
       }
     });
   }
-
-  // login = (req, res) => {
-  //   const fundooNote = {
-  //     email: req.body.email,
-  //     password: req.body.password,
-  //   };
-  //   fundooNotes.login(fundooNote, (error, data) => {
-  //     if (data) {
-  //         bcrypt.compare(fundooNotes.password, data.password, function(err, result){
-  //           if(err) {
-  //             res.json({
-  //               error: err
-  //             })
-  //           }
-  //           if (result){
-  //             let token = jwt.sign({name: data.name}, 'verySecretValue', {expiresIn : '1h'})
-  //             res.json({
-  //               message: 'login successful',
-  //               token
-  //             })
-  //           }else{
-  //             res.json({
-  //               message: 'password does not match'
-  //             })
-  //           }
-  //         })
-  //     } else {
-  //       res.json({
-  //         message: 'No user found'
-  //       })
-  //     }
-      // else {
-      //   res.status(200).send({
-      //     success: true,
-      //     message: 'login successfull!!!',
-      //     result: data,
-      //   });
-      // }
-  //   });
-  // }
-    // login = (req, res) => {
-    //   fundooNotes.login(req, res);
-    // }
 }
 
 module.exports = new Controller();

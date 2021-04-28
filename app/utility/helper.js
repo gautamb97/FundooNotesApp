@@ -8,6 +8,10 @@
 */
 const Joi = require('joi');
 
+/**
+ * @description   : validating all parameters we are getting from the user for registration
+ * @method        : string, min, required, pattern of JOI
+*/
 const authSchema = Joi.object({
   firstName: Joi.string()
     .min(3)

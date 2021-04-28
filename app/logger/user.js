@@ -12,6 +12,11 @@ const {
   format,
 } = require('winston');
 
+/**
+ * @description   : here it creates a log for info and error whatever logs we are
+ *                  getting as per that
+ * @method        : createLogger to create logs
+*/
 const logger = createLogger({
   transports: [
     new transports.File({
