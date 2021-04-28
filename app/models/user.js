@@ -88,6 +88,17 @@ class Model {
         }
       });
   }
+
+  forgotPassword = (data, callback) => {
+    const username = data.email;
+
+    FundooNoteModel.findOne({ email: username })
+      .then((dataOne) => {
+        callback(null, dataOne);
+      }).catch((err) => {
+        callback(err);
+      });
+  }
 }
 
 module.exports = new Model();

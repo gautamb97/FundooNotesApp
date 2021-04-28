@@ -24,6 +24,10 @@ class Service {
   login = (data, callback) => {
     models.login(data, callback);
   }
+
+  forgotPassword = (data, callback) => {
+    models.forgotPassword(data, callback);
+  }
 }
 
 module.exports = new Service();
