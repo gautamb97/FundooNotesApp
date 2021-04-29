@@ -8,6 +8,8 @@
 */
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const logger = require('../logger/user');
 require('dotenv').config();
 
 /**
@@ -39,7 +41,31 @@ const generatingToken = (data) => {
   return token;
 };
 
+const sendingEmail = (data) => {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+
+  const message = {
+    from: process.env.EMAIL,
+    to: data.email,
+    subject: 'Hello Endrew',
+    text: 'This mail is just for testing',
+
+  };
+
+  transporter.sendMail(message, (err, info) => {
+    const sendEmailInfo = err ? logger.log('error', err) : logger.log('info', info);
+    return sendEmailInfo;
+  });
+};
+
 module.exports = {
   authSchema,
   generatingToken,
+  sendingEmail,
 };

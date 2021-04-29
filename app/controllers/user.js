@@ -6,10 +6,8 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 require('dotenv').config();
-const nodemailer = require('nodemailer');
 const services = require('../services/user');
 const { authSchema, generatingToken } = require('../utility/helper');
-const logger = require('../logger/user');
 
 /**
  * @description    : This class has two methods to create and login of user
@@ -90,35 +88,14 @@ class Controller {
       if (error) {
         res.status(400).send({
           success: false,
-          message: 'login failed',
+          message: 'failed to send email',
           error,
         });
       } else {
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD,
-          },
-        });
-
-        const message = {
-          from: process.env.EMAIL,
-          to: userCredential.email,
-          subject: 'Hello Endrew',
-          text: 'This mail is just for testing',
-
-        };
-
-        transporter.sendMail(message, (err, info) => {
-          if (err) {
-            logger.log('error', err);
-          } else {
-            res.status(200).send({
-              success: true,
-              message: 'mailed successfully',
-            });
-          }
+        res.status(200).send({
+          success: true,
+          message: 'Email sent successfully',
+          result,
         });
       }
     });

@@ -6,6 +6,7 @@
 */
 const bcrypt = require('bcrypt');
 const models = require('../models/user');
+const { sendingEmail } = require('../utility/helper');
 
 class Service {
   /**
@@ -46,7 +47,11 @@ class Service {
   }
 
   forgotPassword = (data, callback) => {
-    models.forgotPassword(data, callback);
+    const username = data;
+    models.forgotPassword(username, (error) => {
+      const sendEmail = error ? callback(error, null) : callback(null, sendingEmail(username));
+      return sendEmail;
+    });
   }
 }
 
