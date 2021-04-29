@@ -49,7 +49,7 @@ class Model {
       email: data.email,
       password: data.password,
     });
-    note.save()
+    note.save();
     FundooNoteModel.findOne({ email: data.email })
       .then((dataOne) => {
         callback(null, dataOne);
@@ -64,28 +64,13 @@ class Model {
    * @method          : comapre to check the password is match for the given user
   */
   login = (data, callback) => {
-    let username = data.email;
-    let password = data.password;
+    const username = data.email;
 
     FundooNoteModel.findOne({ email: username })
       .then((user) => {
-        if (user) {
-          bcrypt.compare(password, user.password, (err, result) => {
-            if (err) {
-              callback(err, null);
-            }
-            if (result) {
-              let resultOne = {
-                message: 'success',
-              };
-              callback(null, resultOne);
-            } else {
-              callback('Password does not match');
-            }
-          });
-        } else {
-          callback('user not found');
-        }
+        callback(null, user);
+      }).catch((err) => {
+        callback(err);
       });
   }
 

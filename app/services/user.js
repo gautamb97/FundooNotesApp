@@ -4,6 +4,7 @@
  * @file          : user.js
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
+const bcrypt = require('bcrypt');
 const models = require('../models/user');
 
 class Service {
@@ -22,7 +23,26 @@ class Service {
    * @method          : login from models
   */
   login = (data, callback) => {
-    models.login(data, callback);
+    const { password } = data;
+    models.login(data, (error, result) => {
+      if (result) {
+        bcrypt.compare(password, result.password, (err, resultt) => {
+          if (err) {
+            callback(err, null);
+          }
+          if (resultt) {
+            const resultOne = {
+              message: 'success',
+            };
+            callback(null, resultOne);
+          } else {
+            callback('Password does not match');
+          }
+        });
+      } else {
+        callback('user not found');
+      }
+    });
   }
 
   forgotPassword = (data, callback) => {

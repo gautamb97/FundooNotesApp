@@ -7,6 +7,8 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 /**
  * @description   : validating all parameters we are getting from the user for registration
@@ -32,6 +34,12 @@ const authSchema = Joi.object({
     .pattern(new RegExp('(?=.*[A-Z])(?=.*[0-9])(?=.*\\W)[a-zA-Z0-9\\#]{8,}')),
 });
 
+const generatingToken = (data) => {
+  const token = jwt.sign({ name: data.name }, process.env.SECRET, { expiresIn: '1h' });
+  return token;
+};
+
 module.exports = {
   authSchema,
+  generatingToken,
 };

@@ -5,11 +5,10 @@
  * @file          : user.js
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
-const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 const services = require('../services/user');
-const { authSchema } = require('../utility/helper');
+const { authSchema, generatingToken } = require('../utility/helper');
 const logger = require('../logger/user');
 
 /**
@@ -77,7 +76,7 @@ class Controller {
         res.status(200).send({
           success: true,
           message: 'logged in successfully',
-          result: jwt.sign({ name: data.name }, 'verySecretValue', { expiresIn: '1h' }),
+          result: generatingToken(data),
         });
       }
     });
@@ -111,9 +110,9 @@ class Controller {
 
         };
 
-        transporter.sendMail(message, function (error, info) {
-          if (error) {
-            logger.log('error', error);
+        transporter.sendMail(message, (err, info) => {
+          if (err) {
+            logger.log('error', err);
           } else {
             res.status(200).send({
               success: true,
