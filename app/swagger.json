@@ -23,17 +23,6 @@
     ],
     "paths": {
         "/registration": {
-            "get": {
-                "tags": [
-                    "FundooNotes"
-                ],
-                "summary": "Get all notes from FundooNotesApp",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "FundooNotes"
@@ -55,6 +44,32 @@
                     },
                     "400": {
                         "description": "Failed to create an new note"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "login to FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "login"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "logged in successfully"
+                    },
+                    "400": {
+                        "description": "login failed"
                     }
                 }
             }
