@@ -8,6 +8,7 @@
 */
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
+const ejs = require('ejs');
 const nodemailer = require('nodemailer');
 const logger = require('../logger/user');
 require('dotenv').config();
@@ -50,17 +51,23 @@ const sendingEmail = (data) => {
     },
   });
 
-  const message = {
-    from: process.env.EMAIL,
-    to: data.email,
-    subject: 'Hello Endrew',
-    text: 'This mail is just for testing',
+  ejs.renderFile('app/view/sendEmail.ejs', (error, result) => {
+    if (error) {
+      logger.log('error', error);
+    } else {
+      const message = {
+        from: process.env.EMAIL,
+        to: data.email,
+        subject: 'Re: Reset your password',
+        html: `${result}<p1> ${'http://localhost:3000/resetPassword'} </p1>`,
 
-  };
+      };
 
-  transporter.sendMail(message, (err, info) => {
-    const sendEmailInfo = err ? logger.log('error', err) : logger.log('info', info);
-    return sendEmailInfo;
+      transporter.sendMail(message, (err, info) => {
+        const sendEmailInfo = err ? logger.log('error', err) : logger.log('info', info);
+        return sendEmailInfo;
+      });
+    }
   });
 };
 

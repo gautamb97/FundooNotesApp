@@ -61,7 +61,6 @@ class Model {
   /**
    * @description     : It uses to login the registered user
    * @param           : data, callback
-   * @method          : comapre to check the password is match for the given user
   */
   login = (data, callback) => {
     const username = data.email;
@@ -74,6 +73,10 @@ class Model {
       });
   }
 
+  /**
+   * @description     : It uses to if a user forgot his/her password so send a mail
+   * @param           : data, callback
+  */
   forgotPassword = (data, callback) => {
     const username = data.email;
 
