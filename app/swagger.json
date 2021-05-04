@@ -73,6 +73,58 @@
                     }
                 }
             }
+        },
+        "/forgotPassword": {
+            "post": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Forgot Password",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "forgot password"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sent mail successfully"
+                    },
+                    "400": {
+                        "description": "unable to send mail"
+                    }
+                }
+            }
+        },
+        "/resetPassword": {
+            "post": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Reset Password in FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "reset password"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reset password successfully"
+                    },
+                    "400": {
+                        "description": "failed to reset password"
+                    }
+                }
+            }
         }
     }
 }

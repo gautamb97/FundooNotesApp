@@ -123,7 +123,6 @@ class Controller {
       password: req.body.password,
       email: tokenVerification.data.email,
     };
-    userCredential.Id = tokenVerification.id;
     services.resetPassword(userCredential, (error, result) => {
       if (error) {
         res.status(400).send({

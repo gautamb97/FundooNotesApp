@@ -94,9 +94,11 @@ class Model {
    * @param  {callback}: giving result back to service
    * @method          : findOneAndUpdate to update password with new one
   */
-  resetPassword = (data, callback) => {
+  resetPassword = async (data, callback) => {
     const newPassword = data.password;
-    FundooNoteModel.findOneAndUpdate({ email: data.email }, { $set: { password: newPassword } })
+    const salt = await bcrypt.genSalt(10);
+    const encrypt = await bcrypt.hash(newPassword, salt);
+    FundooNoteModel.findOneAndUpdate({ email: data.email }, { password: encrypt })
       .then((credential) => {
         callback(null, credential);
       }).catch((err) => {

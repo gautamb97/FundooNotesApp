@@ -70,19 +70,7 @@ class Service {
    * @method              : resetPassword from models
   */
   resetPassword = (data, callback) => {
-    const userCredential = {
-      email: data.email,
-      password: data.password,
-    };
-    models.resetPassword(userCredential, (error, result) => {
-      if (result) {
-        bcrypt.hash(result.password, 10, (err, resultt) => {
-          err ? callback(err) : callback(null, resultt);
-        });
-      } else {
-        callback('Unable to change password or token expired');
-      }
-    });
+    models.resetPassword(data, callback);
   }
 }
 
