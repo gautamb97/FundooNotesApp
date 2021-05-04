@@ -46,6 +46,12 @@ class Service {
     });
   }
 
+  /**
+   * @description         : it acts as a midlleware for models and controllers
+   * @param    {data}     : taking data from controller
+   * @param   {callback}  : giving result to controller
+   * @method              : forgotPassword from models
+  */
   forgotPassword = (data, callback) => {
     const username = data;
     models.forgotPassword(username, (error, result) => {
@@ -53,6 +59,28 @@ class Service {
         error ? callback(error, null) : callback(null, sendingEmail(username));
       } else {
         callback('Email does not exist');
+      }
+    });
+  }
+
+  /**
+   * @description         : it acts as a midlleware for models and controllers
+   * @param    {data}     : taking data from controller
+   * @param   {callback}  : giving result to controller
+   * @method              : resetPassword from models
+  */
+  resetPassword = (data, callback) => {
+    const userCredential = {
+      email: data.email,
+      password: data.password,
+    };
+    models.resetPassword(userCredential, (error, result) => {
+      if (result) {
+        bcrypt.hash(result.password, 10, (err, resultt) => {
+          err ? callback(err) : callback(null, resultt);
+        });
+      } else {
+        callback('Unable to change password or token expired');
       }
     });
   }

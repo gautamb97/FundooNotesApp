@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /**
  * @description   : It is use to establish the connection with database using mongoose ODM
  *                  to MongoDB
@@ -17,6 +18,7 @@ mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false,
 }).then(() => {
   logger.log('info', 'Successfully connected to the database');
 }).catch((err) => {

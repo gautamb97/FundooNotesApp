@@ -13,4 +13,6 @@ module.exports = (app) => {
   app.post('/login', controller.login);
 
   app.post('/forgotPassword', controller.forgotPassword);
+
+  app.post('/resetPassword', controller.resetPassword);
 };

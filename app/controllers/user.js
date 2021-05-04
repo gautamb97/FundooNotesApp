@@ -6,12 +6,13 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const services = require('../services/user');
 const { authSchema, generatingToken } = require('../utility/helper');
 
 /**
  * @description    : This class has two methods to create and login of user
- * @methods        : create and login
+ * @methods        : create, login and forgotPassword
 */
 
 class Controller {
@@ -80,6 +81,13 @@ class Controller {
     });
   }
 
+  /**
+   * @description     : used when a user forgot his/her password
+   * @param {httprequest} : req
+   * @param {httpresponse} : res
+   * @method          : forgotPasssword
+   * @file            : user.js
+  */
   forgotPassword = (req, res) => {
     const userCredential = {
       email: req.body.username,
@@ -95,6 +103,38 @@ class Controller {
         res.status(200).send({
           success: true,
           message: 'Email sent successfully',
+          result,
+        });
+      }
+    });
+  }
+
+  /**
+   * @description     : used when a user forgot his/her password
+   * @param {httprequest} : req
+   * @param {httpresponse} : res
+   * @method          : resetPassword
+   * @package         : jwt
+   * @file            : user.js
+  */
+  resetPassword = (req, res) => {
+    const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
+    const userCredential = {
+      password: req.body.password,
+      email: tokenVerification.data.email,
+    };
+    userCredential.Id = tokenVerification.id;
+    services.resetPassword(userCredential, (error, result) => {
+      if (error) {
+        res.status(400).send({
+          success: false,
+          message: 'failed reset the password',
+          error,
+        });
+      } else {
+        res.status(200).send({
+          success: true,
+          message: 'password changed successfully',
           result,
         });
       }

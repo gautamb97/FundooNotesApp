@@ -87,6 +87,22 @@ class Model {
         callback(err);
       });
   }
+
+  /**
+   * @description     : It uses to if a user wants to reset his/her password
+   * @param    {data} : taking from service
+   * @param  {callback}: giving result back to service
+   * @method          : findOneAndUpdate to update password with new one
+  */
+  resetPassword = (data, callback) => {
+    const newPassword = data.password;
+    FundooNoteModel.findOneAndUpdate({ email: data.email }, { $set: { password: newPassword } })
+      .then((credential) => {
+        callback(null, credential);
+      }).catch((err) => {
+        callback(err);
+      });
+  }
 }
 
 module.exports = new Model();

@@ -37,11 +37,21 @@ const authSchema = Joi.object({
     .pattern(new RegExp('(?=.*[A-Z])(?=.*[0-9])(?=.*\\W)[a-zA-Z0-9\\#]{8,}')),
 });
 
+/**
+ * @description   : creating token using jsonwebtoken module
+ * @param {data} as data which comes from the body of postmen
+ * @module        : jwt
+*/
 const generatingToken = (data) => {
-  const token = jwt.sign({ name: data.name }, process.env.SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ data }, process.env.SECRET, { expiresIn: '1h' });
   return token;
 };
 
+/**
+ * @description   : sending an email through nodemailer
+ * @module        : nodemailer, ejs
+ * @file          : helper.js
+*/
 const sendingEmail = (data) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -59,7 +69,7 @@ const sendingEmail = (data) => {
         from: process.env.EMAIL,
         to: data.email,
         subject: 'Re: Reset your password',
-        html: `${result}<p1> ${'http://localhost:3000/resetPassword'} </p1>`,
+        html: `${result}<button><a href="${'http://localhost:3000/resetPassword/'}${generatingToken(data)}">Click here</a></button>`,
 
       };
 
