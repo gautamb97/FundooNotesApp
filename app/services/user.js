@@ -53,10 +53,9 @@ class Service {
    * @method              : forgotPassword from models
   */
   forgotPassword = (data, callback) => {
-    const username = data;
-    models.forgotPassword(username, (error, result) => {
+    models.forgotPassword(data, (error, result) => {
       if (result) {
-        error ? callback(error, null) : callback(null, sendingEmail(username));
+        error ? callback(error, null) : callback(null, sendingEmail(data));
       } else {
         callback('Email does not exist');
       }

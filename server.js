@@ -11,14 +11,13 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerDoc = require('./app/swagger.json');
 const logger = require('./app/logger/user');
 require('dotenv').config();
+require('./config/dbConfig');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
-
-require('./config/dbConfig');
 
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the FundooNotesApp.' });

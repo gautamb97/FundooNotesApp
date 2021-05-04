@@ -63,9 +63,7 @@ class Model {
    * @param           : data, callback
   */
   login = (data, callback) => {
-    const username = data.email;
-
-    FundooNoteModel.findOne({ email: username })
+    FundooNoteModel.findOne({ email: data.email })
       .then((user) => {
         callback(null, user);
       }).catch((err) => {
@@ -78,9 +76,7 @@ class Model {
    * @param           : data, callback
   */
   forgotPassword = (data, callback) => {
-    const username = data.email;
-
-    FundooNoteModel.findOne({ email: username })
+    FundooNoteModel.findOne({ email: data.email })
       .then((dataOne) => {
         callback(null, dataOne);
       }).catch((err) => {
@@ -95,9 +91,8 @@ class Model {
    * @method          : findOneAndUpdate to update password with new one
   */
   resetPassword = async (data, callback) => {
-    const newPassword = data.password;
     const salt = await bcrypt.genSalt(10);
-    const encrypt = await bcrypt.hash(newPassword, salt);
+    const encrypt = await bcrypt.hash(data.password, salt);
     FundooNoteModel.findOneAndUpdate({ email: data.email }, { password: encrypt })
       .then((credential) => {
         callback(null, credential);
