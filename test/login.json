@@ -3,6 +3,10 @@
         "login": {
             "email": "virat123@gmail.com",
             "password": "Virat123#"
+        },
+        "loginWithImproperDetails": {
+            "email": "virat123@gmail.com",
+            "password": "virat12"
         }
     }
 }

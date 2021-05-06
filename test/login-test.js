@@ -19,4 +19,15 @@ describe('login', () => {
         done();
       });
   });
+  it('givenLoginDetails_whenImproper_shouldUnableToLogin', (done) => {
+    const loginDetails = loginData.user.loginWithImproperDetails;
+    chai
+      .request(server)
+      .post('/login')
+      .send(loginDetails)
+      .end((err, res) => {
+        res.should.have.status(400);
+        done();
+      });
+  });
 });
