@@ -30,3 +30,5 @@ app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 app.listen(process.env.PORT, () => {
   logger.log('info', 'Server is listening on port 3000');
 });
+
+module.exports = app;

@@ -23,35 +23,40 @@ class Controller {
    *                  from the object and using services file method
   */
   create = (req, res) => {
-    const userDetails = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-    };
-    const validationResult = authSchema.validate(userDetails);
-    if (validationResult.error) {
-      res.status(400).send({
-        success: false,
-        message: 'Pass the proper format of all the fields',
-        data: validationResult,
-      });
-      return;
-    }
-    services.create(userDetails, (error, data) => {
-      if (error) {
+    try {
+      const userDetails = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+      };
+      const validationResult = authSchema.validate(userDetails);
+      if (validationResult.error) {
         res.status(400).send({
           success: false,
-          message: 'Some error occured',
+          message: 'Pass the proper format of all the fields',
+          data: validationResult,
         });
-      } else {
-        res.status(200).send({
+        return;
+      }
+      services.create(userDetails, (error, data) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to register',
+          });
+        }
+        return res.status(200).send({
           success: true,
           message: 'created successfully',
-          result: data,
         });
-      }
-    });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
   }
 
   /**
@@ -60,25 +65,31 @@ class Controller {
    * @method        : services file method for login having an object and callback
   */
   login = (req, res) => {
-    const loginCredentials = {
-      email: req.body.username,
-      password: req.body.password,
-    };
-    services.login(loginCredentials, (error, data) => {
-      if (error) {
-        res.status(400).send({
-          success: false,
-          message: 'login failed',
-          error,
-        });
-      } else {
-        res.status(200).send({
+    try {
+      const loginCredentials = {
+        email: req.body.email,
+        password: req.body.password,
+      };
+      services.login(loginCredentials, (error, data) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'login failed',
+            error,
+          });
+        }
+        return res.status(200).send({
           success: true,
           message: 'logged in successfully',
           result: generatingToken(data),
         });
-      }
-    });
+      });
+    } catch (err) {
+      return res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
   }
 
   /**
@@ -89,24 +100,30 @@ class Controller {
    * @file            : user.js
   */
   forgotPassword = (req, res) => {
-    const userCredential = {
-      email: req.body.username,
-    };
-    services.forgotPassword(userCredential, (error, result) => {
-      if (error) {
-        res.status(400).send({
-          success: false,
-          message: 'failed to send email',
-          error,
-        });
-      } else {
-        res.status(200).send({
+    try {
+      const userCredential = {
+        email: req.body.username,
+      };
+      services.forgotPassword(userCredential, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'failed to send email',
+            error,
+          });
+        }
+        return res.status(200).send({
           success: true,
           message: 'Email sent successfully',
           result,
         });
-      }
-    });
+      });
+    } catch (err) {
+      return res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
   }
 
   /**
@@ -118,26 +135,32 @@ class Controller {
    * @file            : user.js
   */
   resetPassword = (req, res) => {
-    const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
-    const userCredential = {
-      password: req.body.password,
-      email: tokenVerification.data.email,
-    };
-    services.resetPassword(userCredential, (error, result) => {
-      if (error) {
-        res.status(400).send({
-          success: false,
-          message: 'failed reset the password',
-          error,
-        });
-      } else {
-        res.status(200).send({
+    try {
+      const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
+      const userCredential = {
+        password: req.body.password,
+        email: tokenVerification.data.email,
+      };
+      services.resetPassword(userCredential, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'failed reset the password',
+            error,
+          });
+        }
+        return res.status(200).send({
           success: true,
           message: 'password changed successfully',
           result,
         });
-      }
-    });
+      });
+    } catch (err) {
+      return res.status(401).send({
+        success: false,
+        message: 'Token expired or invalid token',
+      });
+    }
   }
 }
 

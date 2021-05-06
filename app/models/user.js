@@ -66,8 +66,6 @@ class Model {
     FundooNoteModel.findOne({ email: data.email })
       .then((user) => {
         callback(null, user);
-      }).catch((err) => {
-        callback(err);
       });
   }
 
@@ -79,8 +77,6 @@ class Model {
     FundooNoteModel.findOne({ email: data.email })
       .then((dataOne) => {
         callback(null, dataOne);
-      }).catch((err) => {
-        callback(err);
       });
   }
 
@@ -96,8 +92,6 @@ class Model {
     FundooNoteModel.findOneAndUpdate({ email: data.email }, { password: encrypt })
       .then((credential) => {
         callback(null, credential);
-      }).catch((err) => {
-        callback(err);
       });
   }
 }
