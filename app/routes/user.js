@@ -6,6 +6,7 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 const controller = require('../controllers/user');
+const noteController = require('../controllers/note');
 
 module.exports = (app) => {
   app.post('/registration', controller.create);
@@ -15,4 +16,6 @@ module.exports = (app) => {
   app.post('/forgotPassword', controller.forgotPassword);
 
   app.post('/resetPassword', controller.resetPassword);
+
+  app.post('/note', noteController.createNote);
 };
