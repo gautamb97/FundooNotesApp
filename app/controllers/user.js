@@ -102,7 +102,7 @@ class Controller {
   forgotPassword = (req, res) => {
     try {
       const userCredential = {
-        email: req.body.username,
+        email: req.body.email,
       };
       services.forgotPassword(userCredential, (error, result) => {
         if (error) {

@@ -17,5 +17,5 @@ module.exports = (app) => {
 
   app.post('/resetPassword', controller.resetPassword);
 
-  app.post('/note', noteController.createNote);
+  app.post('/notes', noteController.createNote);
 };
