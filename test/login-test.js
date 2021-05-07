@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const server = require('../server');
 
 chai.use(chaiHttp);
-const loginData = require('./login.json');
+const loginData = require('./user.json');
 
 chai.should();
 

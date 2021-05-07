@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const server = require('../server');
 
 chai.use(chaiHttp);
-const registrationData = require('./registration.json');
+const registrationData = require('./user.json');
 
 chai.should();
 
