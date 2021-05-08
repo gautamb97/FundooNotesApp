@@ -4,7 +4,10 @@
   "description": "It is created to make some notes and store it to data base.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "start": "nodemon server.js",
+    "lint": "eslint ./",
+    "debug": "nodemon --inspect server.js"
   },
   "keywords": [
     "Express",
@@ -16,7 +19,24 @@
   "author": "Gautam Biswal",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mongoose": "^5.12.5"
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.5",
+    "nodemailer": "^6.6.0",
+    "swagger-ui-express": "^4.1.6",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "chai-http": "^4.3.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.3.2"
   }
 }
