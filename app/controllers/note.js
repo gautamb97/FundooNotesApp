@@ -7,9 +7,9 @@ class NoteController {
         const noteDetails = {
           title: req.body.title,
           description: req.body.description,
-          color: req.body.color,
         };
-        services.createNote(noteDetails, (error, data) => {
+        const token = req.headers.token;
+        services.createNote(noteDetails, token, (error, data) => {
           if (error) {
             return res.status(400).send({
               success: false,
@@ -19,6 +19,7 @@ class NoteController {
           return res.status(200).send({
             success: true,
             message: 'note created successfully',
+            data,
           });
         });
       } catch (err) {

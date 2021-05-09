@@ -33,7 +33,7 @@ class Service {
           }
           if (resultt) {
             const resultOne = {
-              message: 'success',
+              result,
             };
             callback(null, resultOne);
           } else {

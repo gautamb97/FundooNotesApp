@@ -7,6 +7,7 @@
 */
 const controller = require('../controllers/user');
 const noteController = require('../controllers/note');
+const { verifyingToken } = require('../utility/helper');
 
 module.exports = (app) => {
   app.post('/registration', controller.create);
@@ -17,5 +18,5 @@ module.exports = (app) => {
 
   app.post('/resetPassword', controller.resetPassword);
 
-  app.post('/notes', noteController.createNote);
+  app.post('/notes', verifyingToken, noteController.createNote);
 };

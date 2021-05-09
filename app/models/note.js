@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const noteSchema = mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  color: { type: String, required: true },
-  isPin: { type: Boolean, required: false },
-  isArchie: { type: Boolean, required: false },
-  isReminder: { type: Boolean, required: false },
-  isTrash: { type: Boolean, required: false },
+  color: { type: String, required: false },
+  isPined: { type: Boolean, default: false },
+  isArchieved: { type: Boolean, default: false },
+  isReminder: { type: Boolean, default: false },
+  isTrashed: { type: Boolean, default: false },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 }, {
   timestamps: true, versionKey: false,
 });
@@ -19,7 +20,7 @@ class NoteModels {
       const note = new NoteModel({
         title: data.title,
         description: data.description,
-        color: data.color,
+        userId: data.userId,
       });
       note.save()
         .then((dataOne) => {

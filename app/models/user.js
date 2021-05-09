@@ -34,7 +34,7 @@ fundooNoteSchema.pre('save', async function (next) {
   }
 });
 
-const FundooNoteModel = mongoose.model('FundooNote', fundooNoteSchema);
+const FundooNoteModel = mongoose.model('User', fundooNoteSchema);
 
 class Model {
   /**
@@ -42,20 +42,20 @@ class Model {
    * @param           : data, callback
    * @method          : save to save the coming data in data base
   */
-  create = (data, callback) => {
+  create = async (data, callback) => {
     const note = new FundooNoteModel({
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       password: data.password,
     });
-    note.save();
-    FundooNoteModel.findOne({ email: data.email })
-      .then((dataOne) => {
-        callback(null, dataOne);
-      }).catch((err) => {
-        callback(err);
-      });
+    const user = await FundooNoteModel.findOne({ email: data.email });
+    if (user) {
+      callback('User already exist');
+    } else {
+      const userData = await note.save();
+      callback(null, userData);
+    }
   }
 
   /**

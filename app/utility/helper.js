@@ -43,8 +43,26 @@ const authSchema = Joi.object({
  * @module        : jwt
 */
 const generatingToken = (data) => {
-  const token = jwt.sign({ data }, process.env.SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ email: data.result.email, id: data.result._id }, process.env.SECRET, { expiresIn: '24h' });
   return token;
+};
+
+const verifyToken = (data) => {
+  const tokenVerification = jwt.verify(data.headers.token, process.env.SECRET);
+  return tokenVerification;
+};
+
+const verifyingToken = (req, res, next) => {
+  const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
+  req.userData = tokenVerification;
+  next();
+};
+
+const getIdByToken = (req, token) => {
+  const data = jwt.verify(token, process.env.SECRET);
+  const userId = data.id;
+  req.userId = userId;
+  return req;
 };
 
 /**
@@ -84,5 +102,8 @@ const sendingEmail = (data) => {
 module.exports = {
   authSchema,
   generatingToken,
+  verifyingToken,
+  getIdByToken,
   sendingEmail,
+  verifyToken,
 };
