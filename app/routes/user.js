@@ -19,4 +19,6 @@ module.exports = (app) => {
   app.post('/resetPassword', controller.resetPassword);
 
   app.post('/notes', verifyingToken, noteController.createNote);
+
+  app.put('/notes/:noteId', verifyingToken, noteController.updateNote);
 };
