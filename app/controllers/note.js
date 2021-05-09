@@ -29,6 +29,26 @@ class NoteController {
         });
       }
     }
+
+    updateNote = (req, res) => {
+      const noteData = {
+        title: req.body.title,
+        description: req.body.description,
+        noteId: req.params.noteId,
+      };
+      services.updateNote(noteData, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to updata note',
+          });
+        }
+        return res.status(200).send({
+          success: true,
+          message: 'note updated successfully',
+        });
+      });
+    }
 }
 
 module.exports = new NoteController();

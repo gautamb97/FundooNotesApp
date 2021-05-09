@@ -6,6 +6,10 @@ class Service {
     const noteDetails = getIdByToken(data, token);
     models.create(noteDetails, callback);
   }
+
+  updateNote = (data, callback) => {
+    models.updateNote(data, callback);
+  }
 }
 
 module.exports = new Service();

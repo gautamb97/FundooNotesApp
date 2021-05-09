@@ -29,6 +29,18 @@ class NoteModels {
           callback(err);
         });
     }
+
+    updateNote = (data, callback) => {
+      NoteModel.findByIdAndUpdate(data.noteId, {
+        title: data.title,
+        description: data.description,
+      })
+        .then((note) => {
+          callback(null, note);
+        }).catch((err) => {
+          callback(err);
+        });
+    }
 }
 
 module.exports = new NoteModels();
