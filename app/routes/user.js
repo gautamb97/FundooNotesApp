@@ -16,7 +16,7 @@ module.exports = (app) => {
 
   app.post('/forgotPassword', controller.forgotPassword);
 
-  app.post('/resetPassword', controller.resetPassword);
+  app.post('/resetPassword', verifyingToken, controller.resetPassword);
 
   app.post('/notes', verifyingToken, noteController.createNote);
 

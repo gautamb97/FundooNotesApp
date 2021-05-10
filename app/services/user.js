@@ -32,10 +32,7 @@ class Service {
             callback(err, null);
           }
           if (resultt) {
-            const resultOne = {
-              result,
-            };
-            callback(null, resultOne);
+            callback(null, result);
           } else {
             callback('Password does not match');
           }
@@ -54,8 +51,13 @@ class Service {
   */
   forgotPassword = (data, callback) => {
     models.forgotPassword(data, (error, result) => {
+      console.log(result);
+      const details = {
+        email: result.email,
+        _id: result._id,
+      };
       if (result) {
-        error ? callback(error, null) : callback(null, sendingEmail(data));
+        error ? callback(error, null) : callback(null, sendingEmail(details));
       } else {
         callback('Email does not exist');
       }

@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 /**
  * @description   : It is use to validate the inputs we are getting from client side using joi and
  *                  also using Regular expression to follow the pattern properly.
@@ -43,26 +42,23 @@ const authSchema = Joi.object({
  * @module        : jwt
 */
 const generatingToken = (data) => {
-  const token = jwt.sign({ email: data.result.email, id: data.result._id }, process.env.SECRET, { expiresIn: '24h' });
+  console.log(data);
+  const token = jwt.sign({ email: data.email, id: data._id }, process.env.SECRET, { expiresIn: '24h' });
   return token;
 };
 
-const verifyToken = (data) => {
-  const tokenVerification = jwt.verify(data.headers.token, process.env.SECRET);
-  return tokenVerification;
-};
-
+/**
+ * @description   : veryfying token using jsonwebtoken module
+ * @param {data}  : it contains the token which we want to verify and then sending to controller
+ * @module        : jwt
+*/
 const verifyingToken = (req, res, next) => {
   const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
   req.userData = tokenVerification;
-  next();
-};
-
-const getIdByToken = (req, token) => {
-  const data = jwt.verify(token, process.env.SECRET);
-  const userId = data.id;
+  console.log(req.userData);
+  const userId = tokenVerification.id;
   req.userId = userId;
-  return req;
+  next();
 };
 
 /**
@@ -103,7 +99,5 @@ module.exports = {
   authSchema,
   generatingToken,
   verifyingToken,
-  getIdByToken,
   sendingEmail,
-  verifyToken,
 };

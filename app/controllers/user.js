@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 /**
  * @description   : It is use to taking the request from the client and gives the response and
  *                  validating whether the input is correct or not.
@@ -6,9 +5,8 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 const services = require('../services/user');
-const { authSchema, generatingToken, verifyToken } = require('../utility/helper');
+const { authSchema, generatingToken } = require('../utility/helper');
 
 /**
  * @description    : This class has two methods to create and login of user
@@ -71,7 +69,6 @@ class Controller {
         password: req.body.password,
       };
       services.login(loginCredentials, (error, data) => {
-        console.log(data);
         if (error) {
           return res.status(400).send({
             success: false,
@@ -82,7 +79,7 @@ class Controller {
         return res.status(200).send({
           success: true,
           message: 'logged in successfully',
-          result: generatingToken(data),
+          data: generatingToken(data),
         });
       });
     } catch (err) {
@@ -137,10 +134,9 @@ class Controller {
   */
   resetPassword = (req, res) => {
     try {
-      const tokenVerification = verifyToken(req);
       const userCredential = {
         password: req.body.password,
-        email: tokenVerification.data.email,
+        email: req.userData.email,
       };
       services.resetPassword(userCredential, (error, result) => {
         if (error) {

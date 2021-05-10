@@ -1,36 +1,54 @@
+/**
+ * @description   : It is use to taking the request from the client and gives the response.
+ * @file          : note.js
+ * @author        : Gautam Biswal <gautam971997@gmail.com>
+*/
 require('dotenv').config();
 const services = require('../services/note');
 
 class NoteController {
-    createNote = (req, res) => {
-      try {
-        const noteDetails = {
-          title: req.body.title,
-          description: req.body.description,
-        };
-        const token = req.headers.token;
-        services.createNote(noteDetails, token, (error, data) => {
-          if (error) {
-            return res.status(400).send({
-              success: false,
-              message: 'Unable to create note',
-            });
-          }
-          return res.status(200).send({
-            success: true,
-            message: 'note created successfully',
-            data,
+  /**
+   * @description : It is creating a note in fundooNotes for particular user.
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : createNote from service.js
+  */
+  createNote = (req, res) => {
+    try {
+      const noteDetails = {
+        title: req.body.title,
+        description: req.body.description,
+        userId: req.userId,
+      };
+      services.createNote(noteDetails, (error, data) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to create note',
           });
+        }
+        return res.status(200).send({
+          success: true,
+          message: 'note created successfully',
+          data,
         });
-      } catch (err) {
-        res.status(500).send({
-          success: false,
-          message: 'Internal server error',
-        });
-      }
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
     }
+  }
 
-    updateNote = (req, res) => {
+  /**
+   * @description : It is updating an existing note in fundooNotes for particular user.
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : updateNote from service.js
+  */
+  updateNote = (req, res) => {
+    try {
       const noteData = {
         title: req.body.title,
         description: req.body.description,
@@ -48,7 +66,13 @@ class NoteController {
           message: 'note updated successfully',
         });
       });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
     }
+  }
 }
 
 module.exports = new NoteController();

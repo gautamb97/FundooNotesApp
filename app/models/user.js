@@ -76,6 +76,7 @@ class Model {
   forgotPassword = (data, callback) => {
     FundooNoteModel.findOne({ email: data.email })
       .then((dataOne) => {
+        console.log(dataOne);
         callback(null, dataOne);
       });
   }
