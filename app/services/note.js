@@ -27,6 +27,10 @@ class Service {
   getAllNotes = (data, callback) => {
     models.getAllNotes(data, callback);
   }
+
+  deleteNote = (data, callback) => {
+    models.deleteNote(data, callback);
+  }
 }
 
 module.exports = new Service();

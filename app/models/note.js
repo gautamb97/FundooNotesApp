@@ -50,6 +50,15 @@ class NoteModels {
           callback(err);
         });
     }
+
+    deleteNote = (data, callback) => {
+      NoteModel.findByIdAndUpdate(data.noteId, { isTrashed: true })
+        .then((note) => {
+          callback(null, note);
+        }).catch((err) => {
+          callback(err);
+        });
+    }
 }
 
 module.exports = new NoteModels();

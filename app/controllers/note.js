@@ -58,7 +58,7 @@ class NoteController {
         if (error) {
           return res.status(400).send({
             success: false,
-            message: 'Unable to updata note',
+            message: 'Unable to update note',
           });
         }
         return res.status(200).send({
@@ -76,11 +76,6 @@ class NoteController {
 
   getAllNotes = (req, res) => {
     try {
-      // const noteData = {
-      //   title: req.body.title,
-      //   description: req.body.description,
-      //   noteId: req.params.noteId,
-      // };
       services.getAllNotes(req, (error, result) => {
         if (error) {
           return res.status(400).send({
@@ -90,7 +85,30 @@ class NoteController {
         }
         return res.status(200).send({
           success: true,
-          message: 'note updated successfully',
+          message: 'fetched notes successfully',
+          result,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
+
+  deleteNote = (req, res) => {
+    try {
+      services.deleteNote(req.params.noteId, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to delete the note',
+          });
+        }
+        return res.status(200).send({
+          success: true,
+          message: 'note deleted successfully',
           result,
         });
       });

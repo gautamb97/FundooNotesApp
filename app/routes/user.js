@@ -23,4 +23,6 @@ module.exports = (app) => {
   app.put('/notes/:noteId', verifyingToken, noteController.updateNote);
 
   app.get('/notes', verifyingToken, noteController.getAllNotes);
+
+  app.delete('/notes/:noteId', verifyingToken, noteController.deleteNote);
 };
