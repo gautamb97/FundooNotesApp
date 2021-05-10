@@ -73,6 +73,34 @@ class NoteController {
       });
     }
   }
+
+  getAllNotes = (req, res) => {
+    try {
+      // const noteData = {
+      //   title: req.body.title,
+      //   description: req.body.description,
+      //   noteId: req.params.noteId,
+      // };
+      services.getAllNotes(req, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to get the notes',
+          });
+        }
+        return res.status(200).send({
+          success: true,
+          message: 'note updated successfully',
+          result,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
 }
 
 module.exports = new NoteController();

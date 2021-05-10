@@ -21,4 +21,6 @@ module.exports = (app) => {
   app.post('/notes', verifyingToken, noteController.createNote);
 
   app.put('/notes/:noteId', verifyingToken, noteController.updateNote);
+
+  app.get('/notes', verifyingToken, noteController.getAllNotes);
 };

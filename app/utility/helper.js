@@ -55,7 +55,6 @@ const generatingToken = (data) => {
 const verifyingToken = (req, res, next) => {
   const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
   req.userData = tokenVerification;
-  console.log(req.userData);
   const userId = tokenVerification.id;
   req.userId = userId;
   next();

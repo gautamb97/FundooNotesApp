@@ -41,6 +41,15 @@ class NoteModels {
           callback(err);
         });
     }
+
+    getAllNotes = (data, callback) => {
+      NoteModel.find()
+        .then((notes) => {
+          callback(null, notes);
+        }).catch((err) => {
+          callback(err);
+        });
+    }
 }
 
 module.exports = new NoteModels();

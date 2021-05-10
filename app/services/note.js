@@ -23,6 +23,10 @@ class Service {
   updateNote = (data, callback) => {
     models.updateNote(data, callback);
   }
+
+  getAllNotes = (data, callback) => {
+    models.getAllNotes(data, callback);
+  }
 }
 
 module.exports = new Service();
