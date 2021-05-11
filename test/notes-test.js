@@ -180,4 +180,17 @@ describe('delete note', () => {
       });
     done();
   });
+
+  it('givenToken_whenTmProper_shouldAbleToAddInTrash', (done) => {
+    const noteDetails = noteData.notes.changeTrashStatus;
+    chai
+      .request(server)
+      .delete('/notes/60961015ba511f4c480119a9')
+      .set('token', `${wrongToken}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(401);
+        done();
+      });
+  });
 });
