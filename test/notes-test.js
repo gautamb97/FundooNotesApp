@@ -21,4 +21,17 @@ describe('notes', () => {
         done();
       });
   });
+
+  it('givenNoteDetails_whenImProper_shouldNotAbleToCreateANote', (done) => {
+    const noteDetails = noteData.notes.createNoteWithImproperData;
+    chai
+      .request(server)
+      .post('/notes')
+      .set('token', `${token}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+    done();
+  });
 });

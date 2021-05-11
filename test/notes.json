@@ -3,6 +3,9 @@
         "createNote": {
             "title": "Note",
             "description": "Creating Note"
+        },
+        "createNoteWithImproperData": {
+            "title": "Success..."
         }
     }
 }
