@@ -43,7 +43,7 @@ describe('notes', () => {
       .post('/notes')
       .send(noteDetails)
       .end((err, res) => {
-        res.should.have.status(500);
+        res.should.have.status(401);
       });
     done();
   });
@@ -56,8 +56,22 @@ describe('notes', () => {
       .set('token', `${wrongToken}`)
       .send(noteDetails)
       .end((err, res) => {
-        res.should.have.status(500);
+        res.should.have.status(401);
       });
     done();
+  });
+});
+
+describe('getAllNotes', () => {
+  it('givenDetails_whenProper_shouldAbleToRetriveAllNote', (done) => {
+    chai
+      .request(server)
+      .get('/notes')
+      .set('token', `${token}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
   });
 });

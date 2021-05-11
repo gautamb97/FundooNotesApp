@@ -18,7 +18,7 @@ describe('resetPassword', () => {
       .set('token', `${wrongToken}`)
       .send(resetPasswordDetails)
       .end((err, res) => {
-        res.should.have.status(500);
+        res.should.have.status(401);
         done();
       });
   });
