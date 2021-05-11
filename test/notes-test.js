@@ -167,4 +167,17 @@ describe('delete note', () => {
         done();
       });
   });
+
+  it('givenNoteIDDetails_whenImProper_shouldNotAbleToAddInTrash', (done) => {
+    const noteDetails = noteData.notes.changeTrashStatus;
+    chai
+      .request(server)
+      .delete('/notes/60961015ba511f4c480119')
+      .set('token', `${token}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+    done();
+  });
 });
