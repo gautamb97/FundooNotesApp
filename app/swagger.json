@@ -111,6 +111,12 @@
                         "in": "body",
                         "name": "body",
                         "description": "reset password"
+                    },
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
                     }
                 ],
                 "produces": [
@@ -125,6 +131,131 @@
                     }
                 }
             }
+        },
+        "/notes": {
+            "post": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Create notes in FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "craete note"
+                    },
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "note created successfully"
+                    },
+                    "400": {
+                        "description": "failed to create note"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Get all notes from FundooNotes",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "got all notes successfully"
+                    },
+                    "400": {
+                        "description": "failed to get notes"
+                    }
+                }
+            }
+        },
+        "/notes/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the person that we want to see",
+                    "type":"string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Update note in FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "update an existing note"
+                    },
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated note successfully"
+                    },
+                    "400": {
+                        "description": "failed to update note"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "delete note from FundooNotes and change the value of trash to true",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "deleted note successfully"
+                    },
+                    "400": {
+                        "description": "failed to delete notes"
+                    }
+                }
+            }
+
         }
+        
     }
 }
