@@ -7,6 +7,7 @@ const noteData = require('./notes.json');
 
 chai.should();
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIiwiaWQiOiI2MDk3YTU1MjNmYTUwZDAxYTRhNTY0N2IiLCJpYXQiOjE2MjA3NDI2ODMsImV4cCI6MTYyMDgyOTA4M30.6IGiHWT-Hvx17UprOvCbla4LpzRfs2FQftmBWAdwMpI';
+const wrongToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIiwiaWQiOiI';
 
 describe('notes', () => {
   it('givenNoteDetails_whenProper_shouldAbleToCreateANote', (done) => {
@@ -40,6 +41,19 @@ describe('notes', () => {
     chai
       .request(server)
       .post('/notes')
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(500);
+      });
+    done();
+  });
+
+  it('givenNoteDetails_whenProper_ButTokenIsWrong_shouldNotAbleToCreateANote', (done) => {
+    const noteDetails = noteData.notes.createNoteWithImproperData;
+    chai
+      .request(server)
+      .post('/notes')
+      .set('token', `${wrongToken}`)
       .send(noteDetails)
       .end((err, res) => {
         res.should.have.status(500);
