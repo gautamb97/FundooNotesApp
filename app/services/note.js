@@ -24,10 +24,20 @@ class Service {
     models.updateNote(data, callback);
   }
 
+  /**
+   * @description   : It is used to find all existing notes taking data from controller
+   *                  and sending to models
+   * @param {data}  : it contains data which we are passing from body
+  */
   getAllNotes = (data, callback) => {
     models.getAllNotes(data, callback);
   }
 
+  /**
+   * @description   : It is used to delete an existing note taking data from controller
+   *                  and sending to models
+   * @param {data}  : it contains data which we are passing from body
+  */
   deleteNote = (data, callback) => {
     models.deleteNote(data, callback);
   }

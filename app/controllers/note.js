@@ -74,6 +74,12 @@ class NoteController {
     }
   }
 
+  /**
+   * @description : It is getting all existing notes from fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : getAllNotes from service.js
+  */
   getAllNotes = (req, res) => {
     try {
       services.getAllNotes(req, (error, result) => {
@@ -97,6 +103,12 @@ class NoteController {
     }
   }
 
+  /**
+   * @description : It is deleting an existing note in fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : deleteNote from service.js
+  */
   deleteNote = (req, res) => {
     try {
       services.deleteNote(req.params.noteId, (error, result) => {

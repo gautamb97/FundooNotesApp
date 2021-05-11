@@ -1,3 +1,12 @@
+/**
+ * Executaion       :1.default node      cmd>nodemon start
+ *
+ * purpose          :to save find update and delete in the database
+ *
+ * @file            :note.js
+ * @author          :Gautam Biswal
+ * @version         :1.0.0
+*/
 const mongoose = require('mongoose');
 
 const noteSchema = mongoose.Schema({
@@ -16,6 +25,11 @@ const noteSchema = mongoose.Schema({
 const NoteModel = mongoose.model('Note', noteSchema);
 
 class NoteModels {
+    /**
+   * @description     : It is use to create and save a new note in data base.
+   * @param           : data, callback
+   * @method          : save to save the coming data in data base
+  */
     create = (data, callback) => {
       const note = new NoteModel({
         title: data.title,
@@ -25,11 +39,14 @@ class NoteModels {
       note.save()
         .then((dataOne) => {
           callback(null, dataOne);
-        }).catch((err) => {
-          callback(err);
         });
     }
 
+    /**
+     * @description   : It updating the existing note for the perticular user
+     * @param {*} data
+     * @param {*} callback
+    */
     updateNote = (data, callback) => {
       NoteModel.findByIdAndUpdate(data.noteId, {
         title: data.title,
@@ -37,26 +54,31 @@ class NoteModels {
       })
         .then((note) => {
           callback(null, note);
-        }).catch((err) => {
-          callback(err);
         });
     }
 
+    /**
+     * @description   : It find all the existing notes
+     * @param {*} data
+     * @param {*} callback
+    */
     getAllNotes = (data, callback) => {
       NoteModel.find()
         .then((notes) => {
           callback(null, notes);
-        }).catch((err) => {
-          callback(err);
         });
     }
 
+    /**
+     * @description   : It deleting the existing note and change the trash value to true
+     * @param {*} data
+     * @param {*} callback
+    */
     deleteNote = (data, callback) => {
-      NoteModel.findByIdAndUpdate(data.noteId, { isTrashed: true })
+      console.log(data);
+      NoteModel.findByIdAndUpdate(data, { isTrashed: true })
         .then((note) => {
           callback(null, note);
-        }).catch((err) => {
-          callback(err);
         });
     }
 }
