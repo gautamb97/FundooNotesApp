@@ -19,14 +19,14 @@ describe('registartion', () => {
         done();
       });
   });
-  it('givenRegistrationDetails_whenProper_shouldSaveInDB', (done) => {
-    const registartionDetails = registrationData.user.registration;
+  it('givenRegistrationDetails_whenImpProper_shouldNotSaveInDB', (done) => {
+    const registartionDetails = registrationData.user.registrationWithImproperDetails;
     chai
       .request(server)
       .post('/registration')
       .send(registartionDetails)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(400);
         done();
       });
   });

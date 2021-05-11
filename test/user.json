@@ -13,7 +13,7 @@
         },
         "login": {
             "email": "www.gautam971997@gmail.com",
-            "password": "Gautam12345#"
+            "password": "Gautam123456#"
         },
         "loginWithImproperDetails": {
             "email": "virat123@gmail.com",
@@ -25,8 +25,7 @@
         "forgotPasswordWithImproperDetails": {
             "email": "abc@gmail.com"
         },
-        "resetPasswordWithExpiredToken": {
-            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoid3d3LmdhdXRhbTk3MTk5N0BnbWFpbC5jb20ifSwiaWF0IjoxNjIwMzc4OTA0LCJleHAiOjE2MjAzODI1MDR9.ny0SleiOla9CccrTEPSGDo85WiI7_9WCVSI8SsknQp4",
+        "resetPassword": {
             "password": "Gautam123456#"
         }
     }
