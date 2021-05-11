@@ -6,6 +6,10 @@
         },
         "createNoteWithImproperData": {
             "title": "Success..."
+        },
+        "updateData": {
+            "title": "Changed",
+            "description": "changed for testing purpose"
         }
     }
 }

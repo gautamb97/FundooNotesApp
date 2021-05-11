@@ -86,3 +86,18 @@ describe('getAllNotes', () => {
       });
   });
 });
+
+describe('update notes', () => {
+  it('givenNoteIDDetails_whenProper_shouldAbleToUpdate_ExistingNote', (done) => {
+    const noteDetails = noteData.notes.updateData;
+    chai
+      .request(server)
+      .put('/notes/60961015ba511f4c480119a9')
+      .set('token', `${token}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
+  });
+});
