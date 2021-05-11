@@ -154,4 +154,17 @@ describe('delete note', () => {
         done();
       });
   });
+
+  it('givenNoteIDDetails_whenEmpty_shouldNotAbleToAddInTrash', (done) => {
+    const noteDetails = noteData.notes.changeTrashStatus;
+    chai
+      .request(server)
+      .delete('/notes/')
+      .set('token', `${token}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(404);
+        done();
+      });
+  });
 });
