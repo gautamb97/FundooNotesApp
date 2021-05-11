@@ -34,4 +34,16 @@ describe('notes', () => {
       });
     done();
   });
+
+  it('givenNoteDetails_whenProper_ButTokenMissing_shouldNotAbleToCreateANote', (done) => {
+    const noteDetails = noteData.notes.createNote;
+    chai
+      .request(server)
+      .post('/notes')
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(500);
+      });
+    done();
+  });
 });
