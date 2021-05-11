@@ -126,4 +126,17 @@ describe('update notes', () => {
       });
     done();
   });
+
+  it('givenNoteIDisEmpty_whenImProper_shouldNotAbleToUpdate_ExistingNote', (done) => {
+    const noteDetails = noteData.notes.updateData;
+    chai
+      .request(server)
+      .put('/notes/')
+      .set('token', `${token}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(404);
+      });
+    done();
+  });
 });
