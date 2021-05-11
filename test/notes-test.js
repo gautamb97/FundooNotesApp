@@ -113,4 +113,17 @@ describe('update notes', () => {
       });
     done();
   });
+
+  it('givenToken_whenImProper_shouldNotAbleToUpdate_ExistingNote', (done) => {
+    const noteDetails = noteData.notes.updateData;
+    chai
+      .request(server)
+      .put('/notes/60961015ba511f4c480119')
+      .set('token', `${wrongToken}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+    done();
+  });
 });
