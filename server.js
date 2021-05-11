@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-
 /**
  * @description   : It is use to establish the connection between the database and server
  * @package       : express, swagger-ui-express, dotenv

@@ -6,19 +6,6 @@
 * @requires {@link https://github.com/petkaantonov/bluebird|bluebird}
 * @requires {@link http://mongoosejs.com/|mongoose}
 *
-* @example
-* var MongoDBAdapter = require('mongo-db-instance');
-*
-* var db = new MongoDBAdapter('mongodb://localhost/database');
-* db.connect()
-* .then(function(uri){
-*   console.log('Connected to ' + uri);
-*   return db.disconnect();
-* })
-* .then(function(uri){
-*   console.log('Disconnected from ' + uri);
-* });
-*
 */
 
 const DEBUG_CONNECTING = 'Connecting to db server %s...';
