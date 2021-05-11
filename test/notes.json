@@ -10,6 +10,9 @@
         "updateData": {
             "title": "Changed",
             "description": "changed for testing purpose"
+        },
+        "changeTrashStatus": {
+            "isTrashed": true
         }
     }
 }

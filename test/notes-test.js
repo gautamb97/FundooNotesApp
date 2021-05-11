@@ -140,3 +140,18 @@ describe('update notes', () => {
     done();
   });
 });
+
+describe('delete note', () => {
+  it('givenNoteIDDetails_whenProper_shouldAbleToAddInTrash', (done) => {
+    const noteDetails = noteData.notes.changeTrashStatus;
+    chai
+      .request(server)
+      .delete('/notes/60961015ba511f4c480119a9')
+      .set('token', `${token}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
+  });
+});
