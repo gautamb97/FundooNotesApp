@@ -74,4 +74,15 @@ describe('getAllNotes', () => {
         done();
       });
   });
+  it('givenToken_whenImProper_shouldNotAbleToRetriveAllNote', (done) => {
+    chai
+      .request(server)
+      .get('/notes')
+      .set('token', `${wrongToken}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(401);
+        done();
+      });
+  });
 });
