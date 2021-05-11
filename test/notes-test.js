@@ -100,4 +100,17 @@ describe('update notes', () => {
         done();
       });
   });
+
+  it('givenNoteIDDetails_whenNotIDImProper_shouldNotAbleToUpdate_ExistingNote', (done) => {
+    const noteDetails = noteData.notes.updateData;
+    chai
+      .request(server)
+      .put('/notes/60961015ba511f4c480119')
+      .set('token', `${token}`)
+      .send(noteDetails)
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+    done();
+  });
 });
