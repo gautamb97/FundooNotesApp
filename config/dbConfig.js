@@ -21,6 +21,10 @@ const DEBUG_DISCONNECTION_ERROR = 'An error has occured while disconnecting from
 
 const blueBird = require('bluebird');
 const mongoose = require('mongoose');
+const debug = require('debug');
+
+const d = debug('mongo-db-instance');
+
 
 const isState = function (state) {
   return mongoose.connection.readyState === mongoose.Connection.STATES[state];
@@ -60,23 +64,28 @@ MongoDBAdapter.prototype.addConnectionListener = function (event, cb) {
 MongoDBAdapter.prototype.connect = function () {
   return new blueBird((resolve, reject) => {
     if (isState('connected')) {
+      d(DEBUG_ALREADY_CONNECTED, this.uri);
       console.log(DEBUG_ALREADY_CONNECTED, this.uri);
       return resolve(this.uri);
     }
 
     this.addConnectionListener('error', function (err) {
+      d(DEBUG_CONNECTION_ERROR, this.uri);
       console.log(DEBUG_CONNECTION_ERROR, this.uri);
       return reject(err);
     });
 
     this.addConnectionListener('open', function () {
+      d(DEBUG_CONNECTED, this.uri);
       console.log(DEBUG_CONNECTED, this.uri);
       return resolve(this.uri);
     });
 
     if (isState('connecting')) {
+      d(DEBUG_ALREADY_CONNECTING, this.uri);
       console.log(DEBUG_ALREADY_CONNECTING, this.uri);
     } else {
+      d(DEBUG_CONNECTING, this.uri);
       console.log(DEBUG_CONNECTING, this.uri);
       mongoose.connect(this.uri, this.options);
     }
@@ -91,23 +100,28 @@ MongoDBAdapter.prototype.connect = function () {
 MongoDBAdapter.prototype.disconnect = function () {
   return new blueBird((resolve, reject) => {
     if (isState('disconnected') || isState('uninitialized')) {
+      d(DEBUG_ALREADY_DISCONNECTED, this.uri);
       console.log(DEBUG_ALREADY_DISCONNECTED, this.uri);
       return resolve(this.uri);
     }
 
     this.addConnectionListener('error', function (err) {
+      d(DEBUG_DISCONNECTION_ERROR, this.uri);
       console.log(DEBUG_DISCONNECTION_ERROR, this.uri);
       return reject(err);
     });
 
     this.addConnectionListener('disconnected', function () {
+      d(DEBUG_DISCONNECTED, this.uri);
       console.log(DEBUG_DISCONNECTED, this.uri);
       return resolve(this.uri);
     });
 
     if (isState('disconnecting')) {
+      d(DEBUG_ALREADY_DISCONNECTING, this.uri);
       console.log(DEBUG_ALREADY_DISCONNECTING, this.uri);
     } else {
+      d(DEBUG_DISCONNECTING, this.uri);
       console.log(DEBUG_DISCONNECTING, this.uri);
       mongoose.disconnect();
     }
