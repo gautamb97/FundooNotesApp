@@ -33,6 +33,11 @@ class Model {
       })
         .then((note) => note);
     }
+
+    deleteLabel = (data) => {
+      LabelModel.findByIdAndRemove(data)
+        .then((label) => label);
+    }
 }
 
 module.exports = new Model();

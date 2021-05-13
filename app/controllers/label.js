@@ -72,6 +72,34 @@ class LabelController {
       });
     }
   }
+
+  /**
+   * @description : It is deleting an existing label in fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : deleteLabel from service.js
+  */
+  deleteLabel = (req, res) => {
+    try {
+      services.deleteLabel(req.params.labelId).then(() => {
+        res.status(200).send({
+          success: true,
+          message: 'label deleted successfully',
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: 'label was unable to delete',
+          err,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
 }
 
 module.exports = new LabelController();

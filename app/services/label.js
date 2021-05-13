@@ -24,5 +24,12 @@ class Service {
     }
     return reject(error, 'unable to update label');
   });
+
+  deleteLabel = (data) => new Promise((resolve, reject) => {
+    if (data) {
+      return resolve(models.deleteLabel(data));
+    }
+    return reject(error, 'unable to update label');
+  });
 }
 module.exports = new Service();
