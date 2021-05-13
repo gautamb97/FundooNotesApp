@@ -19,17 +19,17 @@ class LabelController {
           label: req.body.label,
           userId: req.userId,
         };
-        services.createLabel(labelDetails, (error, data) => {
-          if (error) {
-            return res.status(400).send({
-              success: false,
-              message: 'Unable to create label',
-            });
-          }
-          return res.status(200).send({
+        services.createLabel(labelDetails).then((data) => {
+          res.status(200).send({
             success: true,
             message: 'label created successfully',
             data,
+          });
+        }).catch((err) => {
+          res.status(400).send({
+            success: false,
+            message: 'label was unable to create',
+            err,
           });
         });
       } catch (err) {
