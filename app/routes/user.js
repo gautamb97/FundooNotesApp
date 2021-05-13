@@ -7,6 +7,7 @@
 */
 const controller = require('../controllers/user');
 const noteController = require('../controllers/note');
+const labelController = require('../controllers/label.js');
 const { verifyingToken } = require('../utility/helper');
 const { cache } = require('../utility/redisCache');
 
@@ -26,4 +27,6 @@ module.exports = (app) => {
   app.get('/notes', verifyingToken, cache, noteController.getAllNotes);
 
   app.delete('/notes/:noteId', verifyingToken, noteController.deleteNote);
+
+  app.post('/labels', verifyingToken, labelController.createLabel);
 };
