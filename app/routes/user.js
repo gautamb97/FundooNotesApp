@@ -29,4 +29,6 @@ module.exports = (app) => {
   app.delete('/notes/:noteId', verifyingToken, noteController.deleteNote);
 
   app.post('/labels', verifyingToken, labelController.createLabel);
+
+  app.put('/labels/:labelsId', verifyingToken, labelController.updateLabel);
 };

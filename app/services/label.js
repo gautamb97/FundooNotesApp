@@ -17,6 +17,5 @@ class Service {
     }
     return reject(error, 'label not created');
   });
-    //models.create(data, callback);
 }
 module.exports = new Service();
