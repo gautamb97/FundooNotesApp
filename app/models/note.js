@@ -15,7 +15,7 @@ const noteSchema = mongoose.Schema({
   color: { type: String, required: false },
   isPined: { type: Boolean, default: false },
   isArchieved: { type: Boolean, default: false },
-  isReminder: { type: Boolean, default: false },
+  isReminder: { type: String, default: false },
   isTrashed: { type: Boolean, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 }, {

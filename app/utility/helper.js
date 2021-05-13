@@ -53,11 +53,17 @@ const generatingToken = (data) => {
  * @module        : jwt
 */
 const verifyingToken = (req, res, next) => {
-  const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
-  req.userData = tokenVerification;
-  const userId = tokenVerification.id;
-  req.userId = userId;
-  next();
+  try {
+    const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
+    req.userData = tokenVerification;
+    const userId = tokenVerification.id;
+    req.userId = userId;
+    next();
+  } catch (err) {
+    res.status(401).send({
+      err: 'Unauthorized user',
+    });
+  }
 };
 
 /**

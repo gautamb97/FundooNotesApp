@@ -4,6 +4,7 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 const models = require('../models/note');
+const { setRedis } = require('../utility/redisCache');
 
 class Service {
   /**
@@ -29,8 +30,20 @@ class Service {
    *                  and sending to models
    * @param {data}  : it contains data which we are passing from body
   */
+//  getAllNotes = (data, callback) => {
+//    models.getAllNotes(data, callback);
+//  }
   getAllNotes = (data, callback) => {
-    models.getAllNotes(data, callback);
+    const KEY = 'notes';
+    models.getAllNotes(data, (error, result) => {
+      console.log('comming to service');
+      if (error) {
+        callback(error, null);
+      } else {
+        setRedis(KEY, result);
+        callback(null, result);
+      }
+    });
   }
 
   /**

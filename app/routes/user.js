@@ -8,6 +8,7 @@
 const controller = require('../controllers/user');
 const noteController = require('../controllers/note');
 const { verifyingToken } = require('../utility/helper');
+const { cache } = require('../utility/redisCache');
 
 module.exports = (app) => {
   app.post('/registration', controller.create);
@@ -22,7 +23,7 @@ module.exports = (app) => {
 
   app.put('/notes/:noteId', verifyingToken, noteController.updateNote);
 
-  app.get('/notes', verifyingToken, noteController.getAllNotes);
+  app.get('/notes', verifyingToken, cache, noteController.getAllNotes);
 
   app.delete('/notes/:noteId', verifyingToken, noteController.deleteNote);
 };
