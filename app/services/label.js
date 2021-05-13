@@ -17,5 +17,12 @@ class Service {
     }
     return reject(error, 'label not created');
   });
+
+  updateLabel = (data) => new Promise((resolve, reject) => {
+    if (data) {
+      return resolve(models.updateLabel(data));
+    }
+    return reject(error, 'unable to update label');
+  });
 }
 module.exports = new Service();

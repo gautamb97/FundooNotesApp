@@ -27,6 +27,13 @@ class Model {
       });
       label.save();
     }
+
+    updateLabel = (data) => {
+      LabelModel.findByIdAndUpdate(data.labelId, {
+        label: data.label,
+      })
+        .then((note) => note);
+    }
 }
 
 module.exports = new Model();

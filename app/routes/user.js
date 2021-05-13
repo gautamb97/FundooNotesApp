@@ -30,5 +30,5 @@ module.exports = (app) => {
 
   app.post('/labels', verifyingToken, labelController.createLabel);
 
-  app.put('/labels/:labelsId', verifyingToken, labelController.updateLabel);
+  app.put('/labels/:labelId', verifyingToken, labelController.updateLabel);
 };

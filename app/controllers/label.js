@@ -39,6 +39,39 @@ class LabelController {
         });
       }
     }
+
+  /**
+   * @description : It is updating an existing label in fundooNotes for particular user.
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : updateLabel from service.js
+  */
+  updateLabel = (req, res) => {
+    try {
+      const labelData = {
+        label: req.body.label,
+        labelId: req.params.labelId,
+      };
+      services.updateLabel(labelData).then((data) => {
+        res.status(200).send({
+          success: true,
+          message: 'label update successfully',
+          data,
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: 'label was unable to update',
+          err,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
 }
 
 module.exports = new LabelController();
