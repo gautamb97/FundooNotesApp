@@ -38,6 +38,9 @@ class Model {
       LabelModel.findByIdAndRemove(data)
         .then((label) => label);
     }
+
+    getAllLabels = () => LabelModel.find()
+      .then((labels) => labels);
 }
 
 module.exports = new Model();

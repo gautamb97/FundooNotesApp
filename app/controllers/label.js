@@ -100,6 +100,35 @@ class LabelController {
       });
     }
   }
+
+  /**
+   * @description : It is getting all existing notes from fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : getAllLabels from service.js
+  */
+  getAllLabels = (req, res) => {
+    try {
+      services.getAllLabels(req).then((labels) => {
+        res.status(200).send({
+          success: true,
+          message: 'fetched all labels successfully',
+          labels,
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: 'unable to fetch labels',
+          err,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
 }
 
 module.exports = new LabelController();

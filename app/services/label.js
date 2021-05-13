@@ -29,7 +29,14 @@ class Service {
     if (data) {
       return resolve(models.deleteLabel(data));
     }
-    return reject(error, 'unable to update label');
+    return reject(error, 'unable to delete label');
+  });
+
+  getAllLabels = (data) => new Promise((resolve, reject) => {
+    if (data) {
+      return resolve(models.getAllLabels(data));
+    }
+    return reject(error, 'unable to fetch labels');
   });
 }
 module.exports = new Service();
