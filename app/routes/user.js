@@ -7,7 +7,7 @@
 */
 const controller = require('../controllers/user');
 const noteController = require('../controllers/note');
-const labelController = require('../controllers/label.js');
+const labelController = require('../controllers/label');
 const { verifyingToken } = require('../utility/helper');
 const { cache } = require('../utility/redisCache');
 
