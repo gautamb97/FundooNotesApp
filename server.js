@@ -9,6 +9,7 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerDoc = require('./app/swagger.json');
 const logger = require('./app/logger/user');
 require('dotenv').config();
+require('./config/redisConfig');
 const MongoDBAdapter = require('./config/dbConfig');
 
 const app = express();
@@ -33,10 +34,10 @@ const db = new MongoDBAdapter(process.env.DB_URL, {
 });
 db.connect()
   .then((uri) => {
-    console.log('Connected to ' + uri);
+    console.log('Connected to ', uri);
   })
   .catch((uri) => {
-    console.log('Disconnected from ' + uri);
+    console.log('Disconnected from ', uri);
     db.disconnect();
   });
 
@@ -44,4 +45,4 @@ app.listen(process.env.PORT, () => {
   logger.log('info', 'Server is listening on port 3000');
 });
 
-// module.exports = app;
+module.exports = app;
