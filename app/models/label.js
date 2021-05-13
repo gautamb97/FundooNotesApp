@@ -7,7 +7,6 @@
  * @author          :Gautam Biswal
  * @version         :1.0.0
 */
-const { reject } = require('bluebird');
 const mongoose = require('mongoose');
 
 const labelSchema = mongoose.Schema({
