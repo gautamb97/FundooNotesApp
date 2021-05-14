@@ -81,7 +81,7 @@ class LabelController {
   */
   deleteLabel = (req, res) => {
     try {
-      services.deleteLabel(req.params.labelId).then(() => {
+      services.deleteLabel(req.params.labelId).then((data) => {
         res.status(200).send({
           success: true,
           message: 'label deleted successfully',

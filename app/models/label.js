@@ -27,12 +27,6 @@ class Model {
       label.save();
     }
 
-    // updateLabel = (data) => {
-    //   LabelModel.findByIdAndUpdate(data.labelId, {
-    //     label: data.label,
-    //   })
-    //     .then((note) => note);
-    // }
     updateLabel = (data) => new Promise((resolve, reject) => {
       LabelModel.findByIdAndUpdate(data.labelId, {
         label: data.label,
@@ -41,10 +35,11 @@ class Model {
         .catch((err) => reject(err));
     })
 
-    deleteLabel = (data) => {
+    deleteLabel = (data) => new Promise((resolve, reject) => {
       LabelModel.findByIdAndRemove(data)
-        .then((label) => label);
-    }
+        .then((label) => resolve(label))
+        .catch((err) => reject(err));
+    })
 
     getAllLabels = () => LabelModel.find()
       .then((labels) => labels);

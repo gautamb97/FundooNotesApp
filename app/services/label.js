@@ -33,10 +33,12 @@ class Service {
   });
 
   deleteLabel = (data) => new Promise((resolve, reject) => {
-    if (data) {
-      return resolve(models.deleteLabel(data));
-    }
-    return reject(error, 'unable to delete label');
+    const result = models.deleteLabel(data);
+    result.then((labelData) => {
+      resolve({ labelData });
+    }).catch((err) => {
+      reject({ err });
+    });
   });
 
   getAllLabels = (data) => new Promise((resolve, reject) => {
