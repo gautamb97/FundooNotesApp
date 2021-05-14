@@ -68,4 +68,16 @@ describe('labels', () => {
       });
     done();
   });
+
+  it('givenToken_whenImProper_shouldNotAbleToGetAllLabels', (done) => {
+    chai
+      .request(server)
+      .get('/labels')
+      .set('token', `${labelData.labels.credential.wrongToken}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+    done();
+  });
 });
