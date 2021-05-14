@@ -80,4 +80,15 @@ describe('labels', () => {
       });
     done();
   });
+
+  it('givenToken_whenMissing_shouldNotAbleToGetAllLabels', (done) => {
+    chai
+      .request(server)
+      .get('/labels')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+    done();
+  });
 });
