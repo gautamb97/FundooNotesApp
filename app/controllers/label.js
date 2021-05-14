@@ -47,12 +47,6 @@ class LabelController {
    * @method       : updateLabel from service.js
   */
   updateLabel = (req, res) => {
-    // if (!req.body.label) {
-    //   res.status(400).send({
-    //     success: false,
-    //     message: 'the field can not be empty which you want to update',
-    //   });
-    // }
     try {
       const labelData = {
         label: req.body.label,
