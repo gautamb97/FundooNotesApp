@@ -41,8 +41,11 @@ class Model {
         .catch((err) => reject(err));
     })
 
-    getAllLabels = () => LabelModel.find()
-      .then((labels) => labels);
+    getAllLabels = () => new Promise((resolve, reject) => {
+      LabelModel.find()
+        .then((labels) => resolve(labels))
+        .catch((err) => reject(err));
+    })
 }
 
 module.exports = new Model();

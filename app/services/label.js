@@ -42,10 +42,12 @@ class Service {
   });
 
   getAllLabels = (data) => new Promise((resolve, reject) => {
-    if (data) {
-      return resolve(models.getAllLabels(data));
-    }
-    return reject(error, 'unable to fetch labels');
+    const result = models.getAllLabels(data);
+    result.then((labelData) => {
+      resolve({ labelData });
+    }).catch((err) => {
+      reject({ err });
+    });
   });
 }
 module.exports = new Service();
