@@ -55,3 +55,17 @@ describe('labels', () => {
     done();
   });
 });
+
+describe('labels', () => {
+  it('givenToken_whenProper_shouldAbleToGetAllLabels', (done) => {
+    chai
+      .request(server)
+      .get('/labels')
+      .set('token', `${labelData.labels.credential.token}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(200);
+      });
+    done();
+  });
+});
