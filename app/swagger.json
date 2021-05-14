@@ -254,6 +254,129 @@
                     }
                 }
             }
+        },
+        "/labels": {
+            "post": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Create label in FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "craete note"
+                    },
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "label created successfully"
+                    },
+                    "400": {
+                        "description": "failed to create label"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Get all labels from FundooNotes",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "got all labels successfully"
+                    },
+                    "400": {
+                        "description": "failed to get labels"
+                    }
+                }
+            }
+        },
+        "/labels/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the person that we want to see",
+                    "type":"string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Update label in FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "update an existing label"
+                    },
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated label successfully"
+                    },
+                    "400": {
+                        "description": "failed to update label"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "delete label from FundooNotes",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "deleted label successfully"
+                    },
+                    "400": {
+                        "description": "failed to delete notes"
+                    }
+                }
+            }
 
         }
         
