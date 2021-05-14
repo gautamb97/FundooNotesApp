@@ -9,14 +9,25 @@ chai.should();
 
 describe('labels', () => {
   it('givenLabelDetails_whenProper_shouldAbleToCreateALabel', (done) => {
-    const noteDetails = labelData.labels.createLabel;
     chai
       .request(server)
       .post('/labels')
       .set('token', `${labelData.labels.credential.token}`)
-      .send(noteDetails)
+      .send(labelData.labels.createLabel)
       .end((err, res) => {
         res.should.have.status(200);
+      });
+    done();
+  });
+
+  it('givenToken_whenImProper_shouldNotAbleToCreateALabel', (done) => {
+    chai
+      .request(server)
+      .post('/labels')
+      .set('token', `${labelData.labels.credential.wrongToken}`)
+      .send(labelData.labels.createLabel)
+      .end((err, res) => {
+        res.should.have.status(401);
       });
     done();
   });
