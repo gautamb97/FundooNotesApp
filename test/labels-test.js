@@ -153,3 +153,29 @@ describe('update labels', () => {
     done();
   });
 });
+
+describe('delete labels', () => {
+  it('givenLabelId_whenProper_shouldAbleToDeletTheLabel', (done) => {
+    chai
+      .request(server)
+      .delete('/labels/609e5065343213120c556424')
+      .set('token', `${labelData.labels.credential.token}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(200);
+      });
+    done();
+  });
+
+  it('givenLabelId_whenImProper_shouldNotAbleToDeletTheLabel', (done) => {
+    chai
+      .request(server)
+      .delete('/labels/609e5065343213120c55642')
+      .set('token', `${labelData.labels.credential.token}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+    done();
+  });
+});
