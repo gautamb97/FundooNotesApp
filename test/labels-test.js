@@ -105,4 +105,16 @@ describe('update labels', () => {
       });
     done();
   });
+
+  it('givenWrongLabelId_whenImProper_shouldNotAbleToUpdateTheLabel', (done) => {
+    chai
+      .request(server)
+      .put('/labels/609e5065343213120c5564')
+      .set('token', `${labelData.labels.credential.token}`)
+      .send(labelData.labels.updateLabel)
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+    done();
+  });
 });
