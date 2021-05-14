@@ -6,6 +6,9 @@
         },
         "createLabel": {
             "label": "Testing"
+        },
+        "updateLabel": {
+            "label": "Updating"
         }
     }
 }

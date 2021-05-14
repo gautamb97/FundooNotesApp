@@ -92,3 +92,17 @@ describe('labels', () => {
     done();
   });
 });
+
+describe('update labels', () => {
+  it('givenUpdateDetails_whenProper_shouldAbleToUpdateTheLabel', (done) => {
+    chai
+      .request(server)
+      .put('/labels/609e5065343213120c556424')
+      .set('token', `${labelData.labels.credential.token}`)
+      .send(labelData.labels.updateLabel)
+      .end((err, res) => {
+        res.should.have.status(200);
+      });
+    done();
+  });
+});
