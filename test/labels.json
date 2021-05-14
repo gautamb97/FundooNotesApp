@@ -1,0 +1,11 @@
+{
+    "labels": {
+        "credential": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIiwiaWQiOiI2MDk3YTU1MjNmYTUwZDAxYTRhNTY0N2IiLCJpYXQiOjE2MjA5MTQ1OTYsImV4cCI6MTYyMTAwMDk5Nn0.YCy28RAIqMPV_cHf9AgzeQ3UVLpt0CdAW4ky5eGJolU",
+            "wrongToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIi"
+        },
+        "createLabel": {
+            "label": "Testing"
+        }
+    }
+}
