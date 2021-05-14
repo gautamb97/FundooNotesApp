@@ -63,20 +63,21 @@ class LabelController {
           success: false,
           message: 'the field can not be empty which you want to update',
         });
+      } else {
+        services.updateLabel(labelData).then((data) => {
+          res.status(200).send({
+            success: true,
+            message: 'label update successfully',
+            data,
+          });
+        }).catch((err) => {
+          res.status(400).send({
+            success: false,
+            message: 'label was unable to update',
+            err,
+          });
+        });
       }
-      services.updateLabel(labelData).then((data) => {
-        res.status(200).send({
-          success: true,
-          message: 'label update successfully',
-          data,
-        });
-      }).catch((err) => {
-        res.status(400).send({
-          success: false,
-          message: 'label was unable to update',
-          err,
-        });
-      });
     } catch (err) {
       res.status(500).send({
         success: false,
