@@ -19,12 +19,13 @@ const labelSchema = mongoose.Schema({
 const LabelModel = mongoose.model('Label', labelSchema);
 
 class Model {
-    createLabel = (data) => {
+    createLabel = async (data) => {
       const label = new LabelModel({
         label: data.label,
         userId: data.userId,
       });
-      label.save();
+      const loadLabel = await label.save();
+      return loadLabel;
     }
 
     updateLabel = (data) => new Promise((resolve, reject) => {

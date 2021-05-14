@@ -11,12 +11,12 @@ class Service {
  * @param {data}  : it contains data which we are passing from body
  * @param {token} : its has login token and sending to helper to extract id of user
 */
-  createLabel = (data) => new Promise((resolve, reject) => {
+  createLabel = async (data) => {
     if (data) {
-      return resolve(models.createLabel(data));
+      const labelData = await models.createLabel(data);
+      return labelData;
     }
-    return reject(error, 'label not created');
-  });
+  }
 
   /**
  * @description   : It is used to update label taking data from controller and sending to models

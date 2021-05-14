@@ -13,24 +13,24 @@ class LabelController {
      * @param {httpresponse} res
      * @method       : createLabel from service.js
     */
-    createLabel = (req, res) => {
+    createLabel = async (req, res) => {
       try {
         const labelDetails = {
           label: req.body.label,
           userId: req.userId,
         };
-        services.createLabel(labelDetails).then((data) => {
-          res.status(200).send({
+        const labelData = await services.createLabel(labelDetails);
+        if (labelData !== null) {
+          return res.status(200).send({
             success: true,
             message: 'label created successfully',
-            data,
+            labelData,
           });
-        }).catch((err) => {
-          res.status(400).send({
-            success: false,
-            message: 'label was unable to create',
-            err,
-          });
+        }
+        return res.status(400).send({
+          success: false,
+          message: 'label was unable to create',
+          err,
         });
       } catch (err) {
         res.status(500).send({
