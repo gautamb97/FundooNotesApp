@@ -7,7 +7,7 @@ const labelData = require('./labels.json');
 
 chai.should();
 
-describe('labels', () => {
+describe('create labels', () => {
   it('givenLabelDetails_whenProper_shouldAbleToCreateALabel', (done) => {
     chai
       .request(server)
@@ -56,7 +56,7 @@ describe('labels', () => {
   });
 });
 
-describe('labels', () => {
+describe('fetch labels', () => {
   it('givenToken_whenProper_shouldAbleToGetAllLabels', (done) => {
     chai
       .request(server)
