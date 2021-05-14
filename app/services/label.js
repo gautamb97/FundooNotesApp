@@ -19,10 +19,12 @@ class Service {
   });
 
   updateLabel = (data) => new Promise((resolve, reject) => {
-    if (data) {
-      return resolve(models.updateLabel(data));
-    }
-    return reject(error, 'unable to update label');
+    const result = models.updateLabel(data);
+    result.then((labelData) => {
+      resolve({ labelData });
+    }).catch((err) => {
+      reject({ err });
+    });
   });
 
   deleteLabel = (data) => new Promise((resolve, reject) => {

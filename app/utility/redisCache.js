@@ -5,7 +5,7 @@ const client = redis.createClient();
 function setRedis(KEY, data) {
   client.setex(KEY, 7200, JSON.stringify(data));
 }
-function cache(req, res, next) {
+function redisCache(req, res, next) {
   client.get('notes', (err, notes) => {
     if (err) throw err;
 
@@ -23,5 +23,5 @@ function cache(req, res, next) {
 }
 
 module.exports = {
-  cache, setRedis,
+  redisCache, setRedis,
 };
