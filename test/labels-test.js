@@ -178,4 +178,27 @@ describe('delete labels', () => {
       });
     done();
   });
+
+  it('givenToken_whenImProper_shouldNotAbleToDeletTheLabel', (done) => {
+    chai
+      .request(server)
+      .delete('/labels/609e47a97dfee23a10f496d6')
+      .set('token', `${labelData.labels.credential.wrongToken}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+    done();
+  });
+
+  it('givenToken_whenMissing_shouldNotAbleToDeletTheLabel', (done) => {
+    chai
+      .request(server)
+      .delete('/labels/609e47a97dfee23a10f496d6')
+      .send()
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+    done();
+  });
 });
