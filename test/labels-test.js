@@ -129,4 +129,16 @@ describe('update labels', () => {
       });
     done();
   });
+
+  it('givenUpdateDetails_whenProper_ButWrongToken_shouldNotAbleToUpdateTheLabel', (done) => {
+    chai
+      .request(server)
+      .put('/labels/609e5065343213120c556424')
+      .set('token', `${labelData.labels.credential.wrongToken}`)
+      .send(labelData.labels.updateLabel)
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+    done();
+  });
 });
