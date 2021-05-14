@@ -141,4 +141,15 @@ describe('update labels', () => {
       });
     done();
   });
+
+  it('givenUpdateDetails_whenProper_ButTokenMissing_shouldNotAbleToUpdateTheLabel', (done) => {
+    chai
+      .request(server)
+      .put('/labels/609e5065343213120c556424')
+      .send(labelData.labels.updateLabel)
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+    done();
+  });
 });
