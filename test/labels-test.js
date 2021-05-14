@@ -117,4 +117,16 @@ describe('update labels', () => {
       });
     done();
   });
+
+  it('givenLabelId_whenMissing_shouldNotAbleToUpdateTheLabel', (done) => {
+    chai
+      .request(server)
+      .put('/labels/')
+      .set('token', `${labelData.labels.credential.token}`)
+      .send(labelData.labels.updateLabel)
+      .end((err, res) => {
+        res.should.have.status(404);
+      });
+    done();
+  });
 });
