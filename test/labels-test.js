@@ -31,4 +31,16 @@ describe('labels', () => {
       });
     done();
   });
+
+  it('givenLabelDetails_whenMissing_shouldNotAbleToCreateALabel', (done) => {
+    chai
+      .request(server)
+      .post('/labels')
+      .set('token', `${labelData.labels.credential.token}`)
+      .send()
+      .end((err, res) => {
+        res.should.have.status(500);
+      });
+    done();
+  });
 });
