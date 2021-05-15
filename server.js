@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the FundooNotesApp.' });
 });
 
-require('./app/routes/user')(app);
+require('./app/routes/routes')(app);
 
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
