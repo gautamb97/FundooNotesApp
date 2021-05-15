@@ -131,6 +131,34 @@ class NoteController {
       });
     }
   }
+
+  addLabelToNote = (req, res) => {
+    try {
+      const data = {
+        labelId: req.body.labelId,
+        noteId: req.body.noteId,
+        userId: req.userId,
+      };
+      services.addLabelToNote(data).then((labelData) => {
+        res.status(200).send({
+          success: true,
+          message: 'label added to note successfully',
+          labelData,
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: 'label was unable to load on note',
+          err,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
 }
 
 module.exports = new NoteController();
