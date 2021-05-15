@@ -18,6 +18,7 @@ const noteSchema = mongoose.Schema({
   isReminder: { type: String, default: false },
   isTrashed: { type: Boolean, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  labelId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Label' }],
 }, {
   timestamps: true, versionKey: false,
 });
@@ -81,6 +82,12 @@ class NoteModels {
           callback(null, note);
         });
     }
+
+    addLabelToNote = (data) => new Promise((resolve, reject) => {
+      NoteModel.findByIdAndUpdate(data.noteId, { $push: { labelId: data.labelId } })
+        .then((label) => resolve(label))
+        .catch((err) => reject(err));
+    })
 }
 
 module.exports = new NoteModels();
