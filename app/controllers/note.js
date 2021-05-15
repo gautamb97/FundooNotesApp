@@ -54,7 +54,7 @@ class NoteController {
         description: req.body.description,
         noteId: req.params.noteId,
       };
-      services.updateNote(noteData, (error, result) => {
+      services.updateNote(noteData, (error) => {
         if (error) {
           return res.status(400).send({
             success: false,
@@ -139,16 +139,42 @@ class NoteController {
         noteId: req.body.noteId,
         userId: req.userId,
       };
-      services.addLabelToNote(data).then((labelData) => {
+      services.addLabelToNote(data).then(() => {
         res.status(200).send({
           success: true,
           message: 'label added to note successfully',
-          labelData,
         });
       }).catch((err) => {
         res.status(400).send({
           success: false,
           message: 'label was unable to load on note',
+          err,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
+
+  removeLabelFromNote = (req, res) => {
+    try {
+      const data = {
+        labelId: req.body.labelId,
+        noteId: req.body.noteId,
+        userId: req.userId,
+      };
+      services.removeLabelFromNote(data).then(() => {
+        res.status(200).send({
+          success: true,
+          message: 'label removed from note successfully',
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: 'label was unable to remove from note',
           err,
         });
       });

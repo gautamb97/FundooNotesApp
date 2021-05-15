@@ -88,6 +88,12 @@ class NoteModels {
         .then((label) => resolve(label))
         .catch((err) => reject(err));
     })
+
+    removeLabelFromNote = (data) => new Promise((resolve, reject) => {
+      NoteModel.findByIdAndUpdate(data.noteId, { $pull: { labelId: data.labelId } })
+        .then((label) => resolve(label))
+        .catch((err) => reject(err));
+    })
 }
 
 module.exports = new NoteModels();

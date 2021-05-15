@@ -43,6 +43,7 @@ class Service {
 
   getAllLabels = (data) => new Promise((resolve, reject) => {
     const result = models.getAllLabels(data);
+    console.log(result);
     result.then((labelData) => {
       resolve({ labelData });
     }).catch((err) => {

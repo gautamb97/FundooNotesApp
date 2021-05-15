@@ -57,6 +57,12 @@ class Service {
     result.then((labelData) => resolve({ labelData }))
       .catch((err) => reject({ err }));
   })
+
+  removeLabelFromNote = (data) => new Promise((resolve, reject) => {
+    const result = models.removeLabelFromNote(data);
+    result.then((labelData) => resolve({ labelData }))
+      .catch((err) => reject({ err }));
+  })
 }
 
 module.exports = new Service();
