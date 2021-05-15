@@ -37,4 +37,6 @@ module.exports = (app) => {
   app.get('/labels', verifyingToken, labelController.getAllLabels);
 
   app.post('/addLabelToNote', verifyingToken, noteController.addLabelToNote);
+
+  app.delete('/removeLabelFromNote', verifyingToken, noteController.removeLabelFromNote);
 };
