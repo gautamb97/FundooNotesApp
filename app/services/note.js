@@ -30,9 +30,6 @@ class Service {
    *                  and sending to models
    * @param {data}  : it contains data which we are passing from body
   */
-//  getAllNotes = (data, callback) => {
-//    models.getAllNotes(data, callback);
-//  }
   getAllNotes = (data, callback) => {
     const KEY = 'notes';
     models.getAllNotes(data, (error, result) => {
@@ -54,6 +51,12 @@ class Service {
   deleteNote = (data, callback) => {
     models.deleteNote(data, callback);
   }
+
+  addLabelToNote = (data) => new Promise((resolve, reject) => {
+    const result = models.addLabelToNote(data);
+    result.then((labelData) => resolve({ labelData }))
+      .catch((err) => reject({ err }));
+  })
 }
 
 module.exports = new Service();
