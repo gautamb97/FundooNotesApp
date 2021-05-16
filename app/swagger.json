@@ -378,6 +378,38 @@
                 }
             }
 
+        },
+        "/addLabelToNote": {
+            "post": {
+                "tags": [
+                    "FundooNotes"
+                ],
+                "summary": "Add label to an existing note in FundooNotes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "add label to note"
+                    },
+                    {
+                        "in": "header",
+                        "name": "token",
+                        "description": "an authorization token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "label created successfully"
+                    },
+                    "400": {
+                        "description": "failed to create label"
+                    }
+                }
+            }
         }
         
     }
