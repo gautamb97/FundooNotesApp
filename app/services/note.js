@@ -52,12 +52,22 @@ class Service {
     models.deleteNote(data, callback);
   }
 
+  /**
+   * @description   : It is used to add label to an existing note taking data from controller
+   *                  and sending to models
+   * @param {data}  : it contains data which we are passing from body
+  */
   addLabelToNote = (data) => new Promise((resolve, reject) => {
     const result = models.addLabelToNote(data);
     result.then((labelData) => resolve({ labelData }))
       .catch((err) => reject({ err }));
   })
 
+  /**
+   * @description   : It is used to delete an existing label from existing note taking data
+   *                  from controller and sending to models
+   * @param {data}  : it contains data which we are passing from body
+  */
   removeLabelFromNote = (data) => new Promise((resolve, reject) => {
     const result = models.removeLabelFromNote(data);
     result.then((labelData) => resolve({ labelData }))

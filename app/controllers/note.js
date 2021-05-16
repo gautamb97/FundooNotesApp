@@ -132,6 +132,12 @@ class NoteController {
     }
   }
 
+  /**
+   * @description : It is adding label to an an existing note in fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : addLabelToNote from service.js
+  */
   addLabelToNote = (req, res) => {
     try {
       const data = {
@@ -166,6 +172,12 @@ class NoteController {
     }
   }
 
+  /**
+   * @description : It is deleting an label from an existing note in fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : removeLabelFromNote from service.js
+  */
   removeLabelFromNote = (req, res) => {
     try {
       const data = {

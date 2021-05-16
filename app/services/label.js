@@ -32,6 +32,12 @@ class Service {
     });
   });
 
+  /**
+ * @description   : It is used to delete an existing label taking data from
+ *                  controller and sending to models
+ * @param {data}  : it contains data which we are passing from body
+ * @param {token} : its has login token and sending to helper to extract id of user
+*/
   deleteLabel = (data) => new Promise((resolve, reject) => {
     const result = models.deleteLabel(data);
     result.then((labelData) => {
@@ -41,6 +47,12 @@ class Service {
     });
   });
 
+  /**
+ * @description   : It is used to get all labels from fundooNotes
+ *                  taking data from controller and sending to models
+ * @param {data}  : it contains data which we are passing from body
+ * @param {token} : its has login token and sending to helper to extract id of user
+*/
   getAllLabels = (data) => new Promise((resolve, reject) => {
     const result = models.getAllLabels(data);
     console.log(result);

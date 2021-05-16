@@ -83,12 +83,20 @@ class NoteModels {
         });
     }
 
+    /**
+     * @description   : It adds label to an existing note
+     * @param {*} data
+    */
     addLabelToNote = (data) => new Promise((resolve, reject) => {
       NoteModel.findByIdAndUpdate(data.noteId, { $push: { labelId: data.labelId } })
         .then((label) => resolve(label))
         .catch((err) => reject(err));
     })
 
+    /**
+     * @description   : It removes label from an existing note
+     * @param {*} data
+    */
     removeLabelFromNote = (data) => new Promise((resolve, reject) => {
       NoteModel.findByIdAndUpdate(data.noteId, { $pull: { labelId: data.labelId } })
         .then((label) => resolve(label))

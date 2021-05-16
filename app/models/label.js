@@ -19,6 +19,10 @@ const labelSchema = mongoose.Schema({
 const LabelModel = mongoose.model('Label', labelSchema);
 
 class Model {
+    /**
+     * @description     : creating label in the fundooNotesApp using async and await
+     * @param {*} data
+    */
     createLabel = async (data) => {
       const label = new LabelModel({
         label: data.label,
@@ -28,6 +32,10 @@ class Model {
       return loadLabel;
     }
 
+    /**
+     * @description     : updating an existing label from fundooNotesApp
+     * @param {*} data
+    */
     updateLabel = (data) => new Promise((resolve, reject) => {
       LabelModel.findByIdAndUpdate(data.labelId, {
         label: data.label,
@@ -36,12 +44,19 @@ class Model {
         .catch((err) => reject(err));
     })
 
+    /**
+     * @description     : daleting an existing label from the fundooNotesApp
+     * @param {*} data
+    */
     deleteLabel = (data) => new Promise((resolve, reject) => {
       LabelModel.findByIdAndRemove(data)
         .then((label) => resolve(label))
         .catch((err) => reject(err));
     })
 
+    /**
+     * @description     : getting all labels from the fundooNotesApp
+    */
     getAllLabels = () => new Promise((resolve, reject) => {
       LabelModel.find()
         .then((labels) => resolve(labels))
