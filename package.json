@@ -4,7 +4,7 @@
   "description": "It is created to make some notes and store it to data base.",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "start": "nodemon server.js",
     "lint": "eslint ./",
     "debug": "nodemon --inspect server.js"
@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.5",
     "nodemailer": "^6.6.0",
+    "nyc": "^15.1.0",
     "redis": "^3.1.2",
     "swagger-ui-express": "^4.1.6",
     "winston": "^3.3.3"
