@@ -403,14 +403,45 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "label created successfully"
+                        "description": "label added to note successfully"
                     },
                     "400": {
-                        "description": "failed to create label"
+                        "description": "failed to add label"
+                    }
+                }
+            }
+        },
+        "/removeLabelFromNote": {
+                "delete": {
+                    "tags": [
+                        "FundooNotes"
+                    ],
+                    "summary": "Remove label from an existing note in FundooNotes",
+                    "parameters": [
+                        {
+                            "in": "body",
+                            "name": "body",
+                            "description": "remove label from note"
+                        },
+                        {
+                            "in": "header",
+                            "name": "token",
+                            "description": "an authorization token",
+                            "required": true
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "label removed from note successfully"
+                        },
+                        "400": {
+                            "description": "failed to remove label"
+                        }
                     }
                 }
             }
         }
-        
-    }
 }
