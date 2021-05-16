@@ -173,18 +173,25 @@ class NoteController {
         noteId: req.body.noteId,
         userId: req.userId,
       };
-      services.removeLabelFromNote(data).then(() => {
-        res.status(200).send({
-          success: true,
-          message: 'label removed from note successfully',
-        });
-      }).catch((err) => {
+      if (!data.labelId || !data.noteId) {
         res.status(400).send({
           success: false,
-          message: 'label was unable to remove from note',
-          err,
+          message: 'the field can not be empty which you want to delete from note',
         });
-      });
+      } else {
+        services.removeLabelFromNote(data).then(() => {
+          res.status(200).send({
+            success: true,
+            message: 'label removed from note successfully',
+          });
+        }).catch((err) => {
+          res.status(400).send({
+            success: false,
+            message: 'label was unable to remove from note',
+            err,
+          });
+        });
+      }
     } catch (err) {
       res.status(500).send({
         success: false,
