@@ -248,7 +248,7 @@ describe('dalete label for note', () => {
       });
   });
 
-  it.only('givenDetails_whenImProperToken_shouldNotAbleToAddLabelToTheNote', () => {
+  it.only('givenDetails_whenImProperToken_shouldNotAbleToDeleteLabelFromTheNote', () => {
     chai
       .request(server)
       .delete('/removeLabelFromNote')
@@ -256,6 +256,26 @@ describe('dalete label for note', () => {
       .send(noteData.notes.addLabelWithProperDetails)
       .end((err, res) => {
         res.should.have.status(401);
+      });
+  });
+
+  it.only('givenDetails_whenTokenMissing_shouldNotAbleDeleteFromTheNote', () => {
+    chai
+      .request(server)
+      .delete('/removeLabelFromNote')
+      .send(noteData.notes.addLabelWithProperDetails)
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+  });
+
+  it.only('givenDetails_whenMissing_shouldNotAbleToDeleteFromTheNote', () => {
+    chai
+      .request(server)
+      .delete('/removeLabelFromNote')
+      .set('token', `${noteData.notes.credential.token}`)
+      .end((err, res) => {
+        res.should.have.status(400);
       });
   });
 });
