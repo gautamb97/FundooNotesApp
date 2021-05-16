@@ -247,4 +247,15 @@ describe('dalete label for note', () => {
         res.should.have.status(200);
       });
   });
+
+  it.only('givenDetails_whenImProperToken_shouldNotAbleToAddLabelToTheNote', () => {
+    chai
+      .request(server)
+      .delete('/removeLabelFromNote')
+      .set('token', `${noteData.notes.credential.wrongToken}`)
+      .send(noteData.notes.addLabelWithProperDetails)
+      .end((err, res) => {
+        res.should.have.status(401);
+      });
+  });
 });
