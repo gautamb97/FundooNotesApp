@@ -139,18 +139,25 @@ class NoteController {
         noteId: req.body.noteId,
         userId: req.userId,
       };
-      services.addLabelToNote(data).then(() => {
-        res.status(200).send({
-          success: true,
-          message: 'label added to note successfully',
-        });
-      }).catch((err) => {
+      if (!data.labelId || !data.noteId) {
         res.status(400).send({
           success: false,
-          message: 'label was unable to load on note',
-          err,
+          message: 'the field can not be empty which you want to add to note',
         });
-      });
+      } else {
+        services.addLabelToNote(data).then(() => {
+          res.status(200).send({
+            success: true,
+            message: 'label added to note successfully',
+          });
+        }).catch((err) => {
+          res.status(400).send({
+            success: false,
+            message: 'label was unable to load on note',
+            err,
+          });
+        });
+      }
     } catch (err) {
       res.status(500).send({
         success: false,
