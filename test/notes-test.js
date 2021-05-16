@@ -199,8 +199,19 @@ describe('add label to note', () => {
       .post('/addLabelToNote')
       .set('token', `${noteData.notes.credential.token}`)
       .send(noteData.notes.addLabelWithProperDetails)
-      .end((res) => {
+      .end((err, res) => {
         res.should.have.status(200);
+      });
+  });
+
+  it.only('givenDetails_whenImProperToken_shouldNotAbleToAddLabelToTheNote', () => {
+    chai
+      .request(server)
+      .post('/addLabelToNote')
+      .set('token', `${noteData.notes.credential.wrongToken}`)
+      .send(noteData.notes.addLabelWithProperDetails)
+      .end((err, res) => {
+        res.should.have.status(401);
       });
   });
 });
