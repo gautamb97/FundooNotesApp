@@ -191,3 +191,16 @@ describe('delete note', () => {
       });
   });
 });
+
+describe('add label to note', () => {
+  it.only('givenDetails_whenProper_shouldAbleToAddLabelToTheNote', () => {
+    chai
+      .request(server)
+      .post('/addLabelToNote')
+      .set('token', `${noteData.notes.credential.token}`)
+      .send(noteData.notes.addLabelWithProperDetails)
+      .end((res) => {
+        res.should.have.status(200);
+      });
+  });
+});
