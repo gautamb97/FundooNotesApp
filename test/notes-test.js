@@ -224,4 +224,14 @@ describe('add label to note', () => {
         res.should.have.status(401);
       });
   });
+
+  it.only('givenDetails_whenMissing_shouldNotAbleToAddLabelToTheNote', () => {
+    chai
+      .request(server)
+      .post('/addLabelToNote')
+      .set('token', `${noteData.notes.credential.token}`)
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+  });
 });
