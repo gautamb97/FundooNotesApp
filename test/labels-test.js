@@ -8,7 +8,7 @@ const labelData = require('./labels.json');
 chai.should();
 
 describe('create labels', () => {
-  it('givenLabelDetails_whenProper_shouldAbleToCreateALabel', (done) => {
+  it.only('givenLabelDetails_whenProper_shouldAbleToCreateALabel', () => {
     chai
       .request(server)
       .post('/labels')
@@ -17,10 +17,9 @@ describe('create labels', () => {
       .end((err, res) => {
         res.should.have.status(200);
       });
-    done();
   });
 
-  it('givenToken_whenImProper_shouldNotAbleToCreateALabel', (done) => {
+  it.only('givenToken_whenImProper_shouldNotAbleToCreateALabel', () => {
     chai
       .request(server)
       .post('/labels')
@@ -29,10 +28,9 @@ describe('create labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 
-  it('givenLabelDetails_whenMissing_shouldNotAbleToCreateALabel', (done) => {
+  it.only('givenLabelDetails_whenMissing_shouldNotAbleToCreateALabel', () => {
     chai
       .request(server)
       .post('/labels')
@@ -41,10 +39,9 @@ describe('create labels', () => {
       .end((err, res) => {
         res.should.have.status(500);
       });
-    done();
   });
 
-  it('givenLabelDetails_whenTokenMissing_shouldNotAbleToCreateALabel', (done) => {
+  it.only('givenLabelDetails_whenTokenMissing_shouldNotAbleToCreateALabel', () => {
     chai
       .request(server)
       .post('/labels')
@@ -52,12 +49,11 @@ describe('create labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 });
 
 describe('fetch labels', () => {
-  it('givenToken_whenProper_shouldAbleToGetAllLabels', (done) => {
+  it.only('givenToken_whenProper_shouldAbleToGetAllLabels', () => {
     chai
       .request(server)
       .get('/labels')
@@ -66,10 +62,9 @@ describe('fetch labels', () => {
       .end((err, res) => {
         res.should.have.status(200);
       });
-    done();
   });
 
-  it('givenToken_whenImProper_shouldNotAbleToGetAllLabels', (done) => {
+  it.only('givenToken_whenImProper_shouldNotAbleToGetAllLabels', () => {
     chai
       .request(server)
       .get('/labels')
@@ -78,10 +73,9 @@ describe('fetch labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 
-  it('givenToken_whenMissing_shouldNotAbleToGetAllLabels', (done) => {
+  it.only('givenToken_whenMissing_shouldNotAbleToGetAllLabels', () => {
     chai
       .request(server)
       .get('/labels')
@@ -89,12 +83,11 @@ describe('fetch labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 });
 
 describe('update labels', () => {
-  it('givenUpdateDetails_whenProper_shouldAbleToUpdateTheLabel', (done) => {
+  it.only('givenUpdateDetails_whenProper_shouldAbleToUpdateTheLabel', () => {
     chai
       .request(server)
       .put('/labels/609e5065343213120c556424')
@@ -103,10 +96,9 @@ describe('update labels', () => {
       .end((err, res) => {
         res.should.have.status(200);
       });
-    done();
   });
 
-  it('givenWrongLabelId_whenImProper_shouldNotAbleToUpdateTheLabel', (done) => {
+  it.only('givenWrongLabelId_whenImProper_shouldNotAbleToUpdateTheLabel', () => {
     chai
       .request(server)
       .put('/labels/609e5065343213120c5564')
@@ -115,10 +107,9 @@ describe('update labels', () => {
       .end((err, res) => {
         res.should.have.status(400);
       });
-    done();
   });
 
-  it('givenLabelId_whenMissing_shouldNotAbleToUpdateTheLabel', (done) => {
+  it.only('givenLabelId_whenMissing_shouldNotAbleToUpdateTheLabel', () => {
     chai
       .request(server)
       .put('/labels/')
@@ -127,10 +118,9 @@ describe('update labels', () => {
       .end((err, res) => {
         res.should.have.status(404);
       });
-    done();
   });
 
-  it('givenUpdateDetails_whenProper_ButWrongToken_shouldNotAbleToUpdateTheLabel', (done) => {
+  it.only('givenUpdateDetails_whenProper_ButWrongToken_shouldNotAbleToUpdateTheLabel', () => {
     chai
       .request(server)
       .put('/labels/609e5065343213120c556424')
@@ -139,10 +129,9 @@ describe('update labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 
-  it('givenUpdateDetails_whenProper_ButTokenMissing_shouldNotAbleToUpdateTheLabel', (done) => {
+  it.only('givenUpdateDetails_whenProper_ButTokenMissing_shouldNotAbleToUpdateTheLabel', () => {
     chai
       .request(server)
       .put('/labels/609e5065343213120c556424')
@@ -150,12 +139,11 @@ describe('update labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 });
 
 describe('delete labels', () => {
-  it('givenLabelId_whenProper_shouldAbleToDeletTheLabel', (done) => {
+  it.only('givenLabelId_whenProper_shouldAbleToDeletTheLabel', () => {
     chai
       .request(server)
       .delete('/labels/609e5065343213120c556424')
@@ -164,10 +152,9 @@ describe('delete labels', () => {
       .end((err, res) => {
         res.should.have.status(200);
       });
-    done();
   });
 
-  it('givenLabelId_whenImProper_shouldNotAbleToDeletTheLabel', (done) => {
+  it.only('givenLabelId_whenImProper_shouldNotAbleToDeletTheLabel', () => {
     chai
       .request(server)
       .delete('/labels/609e5065343213120c55642')
@@ -176,10 +163,9 @@ describe('delete labels', () => {
       .end((err, res) => {
         res.should.have.status(400);
       });
-    done();
   });
 
-  it('givenToken_whenImProper_shouldNotAbleToDeletTheLabel', (done) => {
+  it.only('givenToken_whenImProper_shouldNotAbleToDeletTheLabel', () => {
     chai
       .request(server)
       .delete('/labels/609e47a97dfee23a10f496d6')
@@ -188,10 +174,9 @@ describe('delete labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 
-  it('givenToken_whenMissing_shouldNotAbleToDeletTheLabel', (done) => {
+  it.only('givenToken_whenMissing_shouldNotAbleToDeletTheLabel', () => {
     chai
       .request(server)
       .delete('/labels/609e47a97dfee23a10f496d6')
@@ -199,6 +184,5 @@ describe('delete labels', () => {
       .end((err, res) => {
         res.should.have.status(401);
       });
-    done();
   });
 });

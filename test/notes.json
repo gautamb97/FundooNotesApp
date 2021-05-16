@@ -1,5 +1,9 @@
 {
     "notes": {
+        "credential": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIiwiaWQiOiI2MDk3YTU1MjNmYTUwZDAxYTRhNTY0N2IiLCJpYXQiOjE2MjExNjM4MzYsImV4cCI6MTYyMTI1MDIzNn0._mLn_FR4dL-aCgXfSUjwXJC3fAT6Mo2aIaDPG5sD348",
+            "wrongToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIi"
+        },
         "createNote": {
             "title": "Note",
             "description": "Creating Note"
@@ -13,6 +17,10 @@
         },
         "changeTrashStatus": {
             "isTrashed": true
+        },
+        "addLabelWithProperDetails": {
+            "labelId": "609e767ced442737dc680afd",
+            "noteId": "60991d935d2fe22e582c53a6"
         }
     }
 }

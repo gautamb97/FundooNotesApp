@@ -1,7 +1,7 @@
 {
     "labels": {
         "credential": {
-            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIiwiaWQiOiI2MDk3YTU1MjNmYTUwZDAxYTRhNTY0N2IiLCJpYXQiOjE2MjEwMDE0ODIsImV4cCI6MTYyMTA4Nzg4Mn0.Cbr3ec7h5oTneYx1RWmreu3sGEBgX7MEZWTBVJkEZ6k",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIiwiaWQiOiI2MDk3YTU1MjNmYTUwZDAxYTRhNTY0N2IiLCJpYXQiOjE2MjExNjM4MzYsImV4cCI6MTYyMTI1MDIzNn0._mLn_FR4dL-aCgXfSUjwXJC3fAT6Mo2aIaDPG5sD348",
             "wrongToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ind3dy5nYXV0YW05NzE5OTdAZ21haWwuY29tIi"
         },
         "createLabel": {
