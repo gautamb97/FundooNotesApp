@@ -25,7 +25,6 @@ const debug = require('debug');
 
 const d = debug('mongo-db-instance');
 
-
 const isState = function (state) {
   return mongoose.connection.readyState === mongoose.Connection.STATES[state];
 };
