@@ -36,6 +36,28 @@ const authSchema = Joi.object({
     .pattern(new RegExp('(?=.*[A-Z])(?=.*[0-9])(?=.*\\W)[a-zA-Z0-9\\#]{8,}')),
 });
 
+const checkIdField = Joi.object({
+  labelId: Joi.string()
+    .required(),
+
+  noteId: Joi.string()
+    .required(),
+
+  userId: Joi.string()
+    .required(),
+});
+
+const updateNoteField = Joi.object({
+  title: Joi.string()
+    .required(),
+
+  description: Joi.string()
+    .required(),
+
+  noteId: Joi.string()
+    .required(),
+});
+
 /**
  * @description   : creating token using jsonwebtoken module
  * @param {data} as data which comes from the body of postmen
@@ -105,4 +127,6 @@ module.exports = {
   generatingToken,
   verifyingToken,
   sendingEmail,
+  checkIdField,
+  updateNoteField,
 };

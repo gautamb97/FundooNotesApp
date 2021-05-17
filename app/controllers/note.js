@@ -5,6 +5,7 @@
 */
 require('dotenv').config();
 const services = require('../services/note');
+const { checkIdField, updateNoteField } = require('../utility/helper');
 
 class NoteController {
   /**
@@ -54,6 +55,15 @@ class NoteController {
         description: req.body.description,
         noteId: req.params.noteId,
       };
+      const checkField = updateNoteField.validate(noteData);
+      if (checkField.error) {
+        res.status(400).send({
+          success: false,
+          message: 'the field can not be empty which you want to update in note',
+          data: checkField,
+        });
+        return;
+      }
       services.updateNote(noteData, (error) => {
         if (error) {
           return res.status(400).send({
@@ -145,25 +155,27 @@ class NoteController {
         noteId: req.body.noteId,
         userId: req.userId,
       };
-      if (!data.labelId || !data.noteId) {
+      const checkField = checkIdField.validate(data);
+      if (checkField.error) {
         res.status(400).send({
           success: false,
           message: 'the field can not be empty which you want to add to note',
+          data: checkField,
         });
-      } else {
-        services.addLabelToNote(data).then(() => {
-          res.status(200).send({
-            success: true,
-            message: 'label added to note successfully',
-          });
-        }).catch((err) => {
-          res.status(400).send({
-            success: false,
-            message: 'label was unable to load on note',
-            err,
-          });
-        });
+        return;
       }
+      services.addLabelToNote(data).then(() => {
+        res.status(200).send({
+          success: true,
+          message: 'label added to note successfully',
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: 'label was unable to load on note',
+          err,
+        });
+      });
     } catch (err) {
       res.status(500).send({
         success: false,
@@ -185,25 +197,26 @@ class NoteController {
         noteId: req.body.noteId,
         userId: req.userId,
       };
-      if (!data.labelId || !data.noteId) {
+      const checkField = checkIdField.validate(data);
+      if (checkField.error) {
         res.status(400).send({
           success: false,
           message: 'the field can not be empty which you want to delete from note',
         });
-      } else {
-        services.removeLabelFromNote(data).then(() => {
-          res.status(200).send({
-            success: true,
-            message: 'label removed from note successfully',
-          });
-        }).catch((err) => {
-          res.status(400).send({
-            success: false,
-            message: 'label was unable to remove from note',
-            err,
-          });
-        });
+        return;
       }
+      services.removeLabelFromNote(data).then(() => {
+        res.status(200).send({
+          success: true,
+          message: 'label removed from note successfully',
+        });
+      }).catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: 'label was unable to remove from note',
+          err,
+        });
+      });
     } catch (err) {
       res.status(500).send({
         success: false,
