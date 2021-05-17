@@ -76,7 +76,6 @@ class NoteModels {
      * @param {*} callback
     */
     deleteNote = (data, callback) => {
-      console.log(data);
       NoteModel.findByIdAndUpdate(data, { isTrashed: true })
         .then((note) => {
           callback(null, note);
@@ -86,22 +85,28 @@ class NoteModels {
     /**
      * @description   : It adds label to an existing note
      * @param {*} data
+     * @returns       : Promise
     */
-    addLabelToNote = (data) => new Promise((resolve, reject) => {
-      NoteModel.findByIdAndUpdate(data.noteId, { $push: { labelId: data.labelId } })
-        .then((label) => resolve(label))
-        .catch((err) => reject(err));
-    })
+    addLabelToNote = (data) => {
+      return new Promise((resolve, reject) => {
+        NoteModel.findByIdAndUpdate(data.noteId, { $push: { labelId: data.labelId } })
+          .then((label) => resolve(label))
+          .catch((err) => reject(err));
+      });
+    }
 
     /**
      * @description   : It removes label from an existing note
      * @param {*} data
+     * @returns       : Promise
     */
-    removeLabelFromNote = (data) => new Promise((resolve, reject) => {
-      NoteModel.findByIdAndUpdate(data.noteId, { $pull: { labelId: data.labelId } })
-        .then((label) => resolve(label))
-        .catch((err) => reject(err));
-    })
+    removeLabelFromNote = (data) => {
+      return new Promise((resolve, reject) => {
+        NoteModel.findByIdAndUpdate(data.noteId, { $pull: { labelId: data.labelId } })
+          .then((label) => resolve(label))
+          .catch((err) => reject(err));
+      });
+    }
 }
 
 module.exports = new NoteModels();
