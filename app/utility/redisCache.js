@@ -12,6 +12,7 @@ const client = redis.createClient();
  *@param {*} KEY
  *@param  {*} data
 */
+
 function setRedis(KEY, data) {
   client.setex(KEY, 7200, JSON.stringify(data));
 }
