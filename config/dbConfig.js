@@ -128,5 +128,20 @@ MongoDBAdapter.prototype.disconnect = function () {
   });
 };
 
+const db = new MongoDBAdapter(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
+db.connect()
+  .then((uri) => {
+    console.log('Connected to ', uri);
+  })
+  .catch((uri) => {
+    console.log('Disconnected from ', uri);
+    db.disconnect();
+  });
+
 // Export the mongodb connection instance
 module.exports = MongoDBAdapter;
