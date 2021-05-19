@@ -9,6 +9,8 @@ const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const ejs = require('ejs');
 const nodemailer = require('nodemailer');
+const redis = require('redis');
+const client = redis.createClient();
 const logger = require('../logger/user');
 require('dotenv').config();
 
@@ -66,6 +68,7 @@ const updateNoteField = Joi.object({
 const generatingToken = (data) => {
   console.log(data);
   const token = jwt.sign({ email: data.email, id: data._id }, process.env.SECRET, { expiresIn: '24h' });
+  client.setex('token', 7200, token);
   return token;
 };
 
@@ -77,10 +80,15 @@ const generatingToken = (data) => {
 const verifyingToken = (req, res, next) => {
   try {
     const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
-    req.userData = tokenVerification;
-    const userId = tokenVerification.id;
-    req.userId = userId;
-    next();
+    client.get('token', (err, result) => {
+      if (err) throw err;
+      if (req.headers.token === result) {
+        req.userData = tokenVerification;
+        const userId = tokenVerification.id;
+        req.userId = userId;
+      }
+      next();
+    });
   } catch (err) {
     res.status(401).send({
       err: 'Unauthorized user',
