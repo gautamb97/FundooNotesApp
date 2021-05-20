@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const ejs = require('ejs');
 const nodemailer = require('nodemailer');
 const redis = require('redis');
+
 const client = redis.createClient();
 const logger = require('../logger/user');
 require('dotenv').config();
