@@ -19,7 +19,8 @@
         "no-underscore-dangle": "off",
         "prefer-destructuring": "off",
         "no-unused-expressions": "off",
-        "prefer-promise-reject-errors": "off"
+        "prefer-promise-reject-errors": "off",
+        "arrow-body-style": "off"
     },
     "parser": "babel-eslint"
 }
