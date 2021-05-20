@@ -26,87 +26,87 @@ const noteSchema = mongoose.Schema({
 const NoteModel = mongoose.model('Note', noteSchema);
 
 class NoteModels {
-    /**
-   * @description     : It is use to create and save a new note in data base.
-   * @param           : data, callback
-   * @method          : save to save the coming data in data base
+  /**
+ * @description     : It is use to create and save a new note in data base.
+ * @param           : data, callback
+ * @method          : save to save the coming data in data base
+*/
+  create = (data, callback) => {
+    const note = new NoteModel({
+      title: data.title,
+      description: data.description,
+      userId: data.userId,
+    });
+    note.save()
+      .then((dataOne) => {
+        callback(null, dataOne);
+      });
+  }
+
+  /**
+   * @description   : It updating the existing note for the perticular user
+   * @param {*} data
+   * @param {*} callback
   */
-    create = (data, callback) => {
-      const note = new NoteModel({
-        title: data.title,
-        description: data.description,
-        userId: data.userId,
+  updateNote = (data, callback) => {
+    NoteModel.findByIdAndUpdate(data.noteId, {
+      title: data.title,
+      description: data.description,
+    })
+      .then((note) => {
+        callback(null, note);
       });
-      note.save()
-        .then((dataOne) => {
-          callback(null, dataOne);
-        });
-    }
+  }
 
-    /**
-     * @description   : It updating the existing note for the perticular user
-     * @param {*} data
-     * @param {*} callback
-    */
-    updateNote = (data, callback) => {
-      NoteModel.findByIdAndUpdate(data.noteId, {
-        title: data.title,
-        description: data.description,
-      })
-        .then((note) => {
-          callback(null, note);
-        });
-    }
-
-    /**
-     * @description   : It find all the existing notes
-     * @param {*} data
-     * @param {*} callback
-    */
-    getAllNotes = (data, callback) => {
-      NoteModel.find()
-        .then((notes) => {
-          callback(null, notes);
-        });
-    }
-
-    /**
-     * @description   : It deleting the existing note and change the trash value to true
-     * @param {*} data
-     * @param {*} callback
-    */
-    deleteNote = (data, callback) => {
-      NoteModel.findByIdAndUpdate(data, { isTrashed: true })
-        .then((note) => {
-          callback(null, note);
-        });
-    }
-
-    /**
-     * @description   : It adds label to an existing note
-     * @param {*} data
-     * @returns       : Promise
-    */
-    addLabelToNote = (data) => {
-      return new Promise((resolve, reject) => {
-        NoteModel.findByIdAndUpdate(data.noteId, { $push: { labelId: data.labelId } })
-          .then((label) => resolve(label))
-          .catch((err) => reject(err));
+  /**
+   * @description   : It find all the existing notes
+   * @param {*} data
+   * @param {*} callback
+  */
+  getAllNotes = (data, callback) => {
+    NoteModel.find()
+      .then((notes) => {
+        callback(null, notes);
       });
-    }
+  }
 
-    /**
-     * @description   : It removes label from an existing note
-     * @param {*} data
-     * @returns       : Promise
-    */
-    removeLabelFromNote = (data) => {
-      return new Promise((resolve, reject) => {
-        NoteModel.findByIdAndUpdate(data.noteId, { $pull: { labelId: data.labelId } })
-          .then((label) => resolve(label))
-          .catch((err) => reject(err));
+  /**
+   * @description   : It deleting the existing note and change the trash value to true
+   * @param {*} data
+   * @param {*} callback
+  */
+  deleteNote = (data, callback) => {
+    NoteModel.findByIdAndUpdate(data, { isTrashed: true })
+      .then((note) => {
+        callback(null, note);
       });
-    }
+  }
+
+  /**
+   * @description   : It adds label to an existing note
+   * @param {*} data
+   * @returns       : Promise
+  */
+  addLabelToNote = (data) => {
+    return new Promise((resolve, reject) => {
+      NoteModel.findByIdAndUpdate(data.noteId, { $addToSet: { labelId: data.labelId } })
+        .then((label) => resolve(label))
+        .catch((err) => reject(err));
+    });
+  }
+
+  /**
+   * @description   : It removes label from an existing note
+   * @param {*} data
+   * @returns       : Promise
+  */
+  removeLabelFromNote = (data) => {
+    return new Promise((resolve, reject) => {
+      NoteModel.findByIdAndUpdate(data.noteId, { $pull: { labelId: data.labelId } })
+        .then((label) => resolve(label))
+        .catch((err) => reject(err));
+    });
+  }
 }
 
 module.exports = new NoteModels();
