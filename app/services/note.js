@@ -57,14 +57,10 @@ class Service {
    * @description   : It is used to add label to an existing note taking data from controller
    *                  and sending to models
    * @param {data}  : it contains data which we are passing from body
-   * @returns       : Promise
+   * @returns       : Callback
   */
-  addLabelToNote = (data) => {
-    return new Promise((resolve, reject) => {
-      const result = models.addLabelToNote(data);
-      result.then((labelData) => resolve({ labelData }))
-        .catch((err) => reject({ err }));
-    });
+  addLabelToNote = (data, callback) => {
+    models.addLabelToNote(data, callback);
   }
 
   /**

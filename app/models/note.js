@@ -85,14 +85,17 @@ class NoteModels {
   /**
    * @description   : It adds label to an existing note
    * @param {*} data
-   * @returns       : Promise
+   * @returns       : Callback
   */
-  addLabelToNote = (data) => {
-    return new Promise((resolve, reject) => {
-      NoteModel.findByIdAndUpdate(data.noteId, { $addToSet: { labelId: data.labelId } })
-        .then((label) => resolve(label))
-        .catch((err) => reject(err));
-    });
+  addLabelToNote = async (data, callback) => {
+    const label = await NoteModel.findOne({ labelId: data.labelId });
+    if (label) {
+      callback('Label already present on the note');
+    } else {
+      const result = await NoteModel.findByIdAndUpdate(data.noteId,
+        { $addToSet: { labelId: data.labelId } });
+      callback(null, result);
+    }
   }
 
   /**

@@ -164,16 +164,17 @@ class NoteController {
         });
         return;
       }
-      services.addLabelToNote(data).then(() => {
-        res.status(200).send({
+      services.addLabelToNote(data, (err) => {
+        if (err) {
+          return res.status(400).send({
+            success: false,
+            message: 'label was unable to attach on note',
+            err,
+          });
+        }
+        return res.status(200).send({
           success: true,
-          message: 'label added to note successfully',
-        });
-      }).catch((err) => {
-        res.status(400).send({
-          success: false,
-          message: 'label was unable to load on note',
-          err,
+          message: 'label was added to note successfully',
         });
       });
     } catch (err) {
