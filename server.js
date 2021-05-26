@@ -6,6 +6,7 @@
 */
 const express = require('express');
 const swaggerUI = require('swagger-ui-express');
+const cors = require('cors');
 const swaggerDoc = require('./app/swagger.json');
 const logger = require('./app/logger/user');
 require('dotenv').config();
@@ -13,6 +14,8 @@ require('./config/redisConfig');
 require('./config/dbConfig');
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 
