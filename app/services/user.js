@@ -52,11 +52,11 @@ class Service {
   forgotPassword = (data, callback) => {
     models.forgotPassword(data, (error, result) => {
       console.log(result);
-      const details = {
-        email: result.email,
-        _id: result._id,
-      };
       if (result) {
+        const details = {
+          email: result.email,
+          _id: result._id,
+        };
         error ? callback(error, null) : callback(null, sendingEmail(details));
       } else {
         callback('Email does not exist');
