@@ -80,10 +80,10 @@ const generatingToken = (data) => {
 */
 const verifyingToken = (req, res, next) => {
   try {
-    const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
+    const tokenVerification = jwt.verify(req.params.token || req.headers.token, process.env.SECRET);
     client.get('token', (err, result) => {
       if (err) throw err;
-      if (req.headers.token === result) {
+      if (req.params.token || req.headers.token === result) {
         req.userData = tokenVerification;
         const userId = tokenVerification.id;
         req.userId = userId;
@@ -119,7 +119,7 @@ const sendingEmail = (data) => {
         from: process.env.EMAIL,
         to: data.email,
         subject: 'Re: Reset your password',
-        html: `${result}<button><a href="${'http://localhost:3000/resetPassword/'}${generatingToken(data)}">Click here</a></button>`,
+        html: `${result}<button><a href="${'http://localhost:4200/resetPassword/'}${generatingToken(data)}">Click here</a></button>`,
 
       };
 
