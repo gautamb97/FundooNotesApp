@@ -79,7 +79,7 @@ class Controller {
         return res.status(200).send({
           success: true,
           message: 'logged in successfully',
-          data: generatingToken(data),
+          token: generatingToken(data),
         });
       });
     } catch (err) {
