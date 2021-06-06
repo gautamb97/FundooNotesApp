@@ -80,10 +80,10 @@ const generatingToken = (data) => {
 */
 const verifyingToken = (req, res, next) => {
   try {
-    const tokenVerification = jwt.verify(req.params.token || req.headers.token, process.env.SECRET);
+    const tokenVerification = jwt.verify(req.headers.token, process.env.SECRET);
     client.get('token', (err, result) => {
       if (err) throw err;
-      if (req.params.token || req.headers.token === result) {
+      if (req.headers.token === result) {
         req.userData = tokenVerification;
         const userId = tokenVerification.id;
         req.userId = userId;

@@ -80,6 +80,7 @@ class Controller {
           success: true,
           message: 'logged in successfully',
           token: generatingToken(data),
+          data,
         });
       });
     } catch (err) {
