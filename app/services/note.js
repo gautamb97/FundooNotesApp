@@ -4,7 +4,7 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 const models = require('../models/note');
-const { setRedis } = require('../utility/redisCache');
+const { setRedis, updateRedis } = require('../utility/redisCache');
 
 class Service {
   /**
@@ -13,7 +13,14 @@ class Service {
    * @param {token} : its has login token and sending to helper to extract id of user
   */
   createNote = (data, callback) => {
-    models.create(data, callback);
+    models.create(data, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        updateRedis(data);
+        callback(null, result);
+      }
+    });
   }
 
   /**
@@ -50,7 +57,14 @@ class Service {
    * @param {data}  : it contains data which we are passing from body
   */
   deleteNote = (data, callback) => {
-    models.deleteNote(data, callback);
+    models.deleteNote(data, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        updateRedis(data);
+        callback(null, result);
+      }
+    });
   }
 
   /**
