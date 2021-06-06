@@ -4,6 +4,7 @@
  * @author        : Gautam Biswal <gautam971997@gmail.com>
 */
 const redis = require('redis');
+const models = require('../models/note');
 
 const client = redis.createClient();
 
@@ -40,6 +41,13 @@ function redisCache(req, res, next) {
   });
 }
 
+function updateRedis(data) {
+  const KEY = 'notes';
+  models.getAllNotes(data, (error, result) => {
+    (result) ? setRedis(KEY, result) : console.log(error);
+  });
+}
+
 module.exports = {
-  redisCache, setRedis,
+  redisCache, setRedis, updateRedis,
 };
