@@ -28,6 +28,8 @@ module.exports = (app) => {
 
   app.delete('/notes/:noteId', verifyingToken, noteController.deleteNote);
 
+  app.delete('/note/:noteId', verifyingToken, noteController.removeNote);
+
   app.post('/labels', verifyingToken, labelController.createLabel);
 
   app.put('/labels/:labelId', verifyingToken, labelController.updateLabel);

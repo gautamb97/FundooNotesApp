@@ -29,7 +29,14 @@ class Service {
    * @param {data}  : it contains data which we are passing from body
   */
   updateNote = (data, callback) => {
-    models.updateNote(data, callback);
+    models.updateNote(data, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        updateRedis(data);
+        callback(null, result);
+      }
+    });
   }
 
   /**
@@ -58,6 +65,22 @@ class Service {
   */
   deleteNote = (data, callback) => {
     models.deleteNote(data, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        updateRedis(data);
+        callback(null, result);
+      }
+    });
+  }
+
+  /**
+   * @description   : It is used to delete an existing note taking data from controller
+   *                  and sending to models
+   * @param {data}  : it contains data which we are passing from body
+  */
+  removeNote = (data, callback) => {
+    models.removeNote(data, (error, result) => {
       if (error) {
         callback(error, null);
       } else {

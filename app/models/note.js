@@ -83,6 +83,18 @@ class NoteModels {
   }
 
   /**
+   * @description   : It deleting the existing note and change the trash value to true
+   * @param {*} data
+   * @param {*} callback
+  */
+  removeNote = (data, callback) => {
+    NoteModel.findOneAndRemove(data)
+      .then((note) => {
+        callback(null, note);
+      });
+  }
+
+  /**
    * @description   : It adds label to an existing note
    * @param {*} data
    * @returns       : Callback

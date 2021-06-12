@@ -130,6 +130,35 @@ class NoteController {
         }
         return res.status(200).send({
           success: true,
+          message: 'note trashed successfully',
+          result,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
+
+  /**
+   * @description : It is deleting an existing note in fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : removeNote from service.js
+  */
+  removeNote = (req, res) => {
+    try {
+      services.removeNote(req.params.noteId, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to permanenetly delete the note',
+          });
+        }
+        return res.status(200).send({
+          success: true,
           message: 'note deleted successfully',
           result,
         });
