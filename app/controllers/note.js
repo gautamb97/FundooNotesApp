@@ -202,10 +202,10 @@ class NoteController {
   }
 
   /**
-   * @description : It is remove an existing note in fundooNotes
+   * @description : It is archive an existing note in fundooNotes
    * @param {httprequest} req
    * @param {httpresponse} res
-   * @method       : removeNote from service.js
+   * @method       : archiveNote from service.js
   */
   archiveNote = (req, res) => {
     try {
@@ -220,6 +220,36 @@ class NoteController {
         return res.status(200).send({
           success: true,
           message: 'note archived successfully',
+          result,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
+
+  /**
+   * @description : It is unArchive an existing note in Archive section of fundooNote
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : unArchiveNote from service.js
+  */
+  unArchiveNote = (req, res) => {
+    try {
+      services.unArchiveNote(req.params.noteId, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to unArchive the note',
+            error,
+          });
+        }
+        return res.status(200).send({
+          success: true,
+          message: 'note unArchived successfully',
           result,
         });
       });

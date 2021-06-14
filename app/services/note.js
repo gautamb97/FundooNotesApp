@@ -123,6 +123,22 @@ class Service {
   }
 
   /**
+   * @description   : It is used to archive an existing note taking data from controller
+   *                  and sending to models
+   * @param {data}  : it contains data which we are passing from params
+  */
+  unArchiveNote = (data, callback) => {
+    models.unArchiveNote(data, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        updateRedis(data);
+        callback(null, result);
+      }
+    });
+  }
+
+  /**
    * @description   : It is used to add label to an existing note taking data from controller
    *                  and sending to models
    * @param {data}  : it contains data which we are passing from body

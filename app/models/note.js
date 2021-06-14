@@ -119,6 +119,18 @@ class NoteModels {
   }
 
   /**
+   * @description   : It unarchives the existing note and change the archive value to false
+   * @param {*} data
+   * @param {*} callback
+  */
+  unArchiveNote = (data, callback) => {
+    NoteModel.findByIdAndUpdate(data, { isArchieved: false })
+      .then((note) => {
+        callback(null, note);
+      });
+  }
+
+  /**
    * @description   : It adds label to an existing note
    * @param {*} data
    * @returns       : Callback
