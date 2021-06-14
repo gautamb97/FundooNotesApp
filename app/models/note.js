@@ -83,12 +83,24 @@ class NoteModels {
   }
 
   /**
-   * @description   : It deleting the existing note and change the trash value to true
+   * @description   : It removing the existing note from the db
    * @param {*} data
    * @param {*} callback
   */
   removeNote = (data, callback) => {
-    NoteModel.findOneAndRemove(data)
+    NoteModel.findByIdAndRemove(data)
+      .then((note) => {
+        callback(null, note);
+      });
+  }
+
+  /**
+   * @description   : It archives the existing note and change the archive value to true
+   * @param {*} data
+   * @param {*} callback
+  */
+  archiveNote = (data, callback) => {
+    NoteModel.findByIdAndUpdate(data, { isArchieved: true })
       .then((note) => {
         callback(null, note);
       });

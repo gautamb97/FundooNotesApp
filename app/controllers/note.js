@@ -143,7 +143,7 @@ class NoteController {
   }
 
   /**
-   * @description : It is deleting an existing note in fundooNotes
+   * @description : It is remove an existing note in fundooNotes
    * @param {httprequest} req
    * @param {httpresponse} res
    * @method       : removeNote from service.js
@@ -155,11 +155,42 @@ class NoteController {
           return res.status(400).send({
             success: false,
             message: 'Unable to permanenetly delete the note',
+            error,
           });
         }
         return res.status(200).send({
           success: true,
-          message: 'note deleted successfully',
+          message: 'note removed successfully',
+          result,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
+
+  /**
+   * @description : It is remove an existing note in fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : removeNote from service.js
+  */
+  archiveNote = (req, res) => {
+    try {
+      services.archiveNote(req.params.noteId, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to archive the note',
+            error,
+          });
+        }
+        return res.status(200).send({
+          success: true,
+          message: 'note archived successfully',
           result,
         });
       });
