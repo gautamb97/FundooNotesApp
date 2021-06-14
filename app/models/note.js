@@ -83,6 +83,18 @@ class NoteModels {
   }
 
   /**
+   * @description   : It restores the existing note and change the trash value to false
+   * @param {*} data
+   * @param {*} callback
+  */
+  restoreNote = (data, callback) => {
+    NoteModel.findByIdAndUpdate(data, { isTrashed: false })
+      .then((note) => {
+        callback(null, note);
+      });
+  }
+
+  /**
    * @description   : It removing the existing note from the db
    * @param {*} data
    * @param {*} callback

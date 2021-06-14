@@ -32,6 +32,8 @@ module.exports = (app) => {
 
   app.put('/notes/archive/:noteId', verifyingToken, noteController.archiveNote);
 
+  app.put('/notes/restore/:noteId', verifyingToken, noteController.restoreNote);
+
   app.post('/labels', verifyingToken, labelController.createLabel);
 
   app.put('/labels/:labelId', verifyingToken, labelController.updateLabel);

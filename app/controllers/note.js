@@ -143,6 +143,35 @@ class NoteController {
   }
 
   /**
+   * @description : It is deleting an existing note in fundooNotes
+   * @param {httprequest} req
+   * @param {httpresponse} res
+   * @method       : deleteNote from service.js
+  */
+  restoreNote = (req, res) => {
+    try {
+      services.restoreNote(req.params.noteId, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Unable to restore the note',
+          });
+        }
+        return res.status(200).send({
+          success: true,
+          message: 'note restored successfully',
+          result,
+        });
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: 'Internal server error',
+      });
+    }
+  }
+
+  /**
    * @description : It is remove an existing note in fundooNotes
    * @param {httprequest} req
    * @param {httpresponse} res

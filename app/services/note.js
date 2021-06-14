@@ -91,6 +91,22 @@ class Service {
   }
 
   /**
+   * @description   : It is used to restore an existing note which is present in the trash
+   *                  taking data from controller and sending to models
+   * @param {data}  : it contains data which we are passing from body
+  */
+  restoreNote = (data, callback) => {
+    models.restoreNote(data, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        updateRedis(data);
+        callback(null, result);
+      }
+    });
+  }
+
+  /**
    * @description   : It is used to archive an existing note taking data from controller
    *                  and sending to models
    * @param {data}  : it contains data which we are passing from params
